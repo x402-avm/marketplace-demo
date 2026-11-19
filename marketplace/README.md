@@ -14,7 +14,7 @@ A decentralized AI agent and tool marketplace powered by the Algorand Virtual Ma
 
 ### Payment Modes
 1. **Per-Call ALGO**: Native microAlgos payment (x402 exact scheme, asset 0).
-2. **Per-Call mUSD**: Algorand Standard Asset (ASA) pegged stablecoin payment (asset ID 3456).
+2. **Per-Call mUSD**: a test ASA created on LocalNet, standing in for a USD stablecoin (asset ID 3456).
 3. **Passes (individual, per vendor)**: a pass is one payment straight to a vendor with the note `x402-pass:<scope>`. Two scopes exist: `listing:<id>` (one service of that vendor) and `vendor:<id>` (all of that vendor's services). Prices are in `servers/marketplace.json` (`listings[].pass`, `vendors[].pass`). A pass is valid for 30 days and only at the vendor that was paid; the caller proves ownership with a wallet-signed, never-submitted identity transaction (`X-Identity-Txn`). There is no marketplace-wide pass.
 4. **Bulk Discounts**: Historical high-volume consumers receive automated tiered discounts verified by on-chain transaction history.
 5. **Settle-on-Success**: Failed tool executions are never settled; users are never charged for tool failures.

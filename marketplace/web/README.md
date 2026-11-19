@@ -1,32 +1,44 @@
-# React + TypeScript + Vite
+# Marketplace Web UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interactive React and TypeScript frontend for the Algorand AI Service Marketplace demonstration, built with Vite and powered by the [`x402-avm-js`](https://github.com/x402-avm/x402-avm-js) client library.
 
-Currently, two official plugins are available:
+The web app allows users to:
+- Browse 64 paid AI tool listings across 4 vendors.
+- Connect local wallets (Lute extension, AlgoKit KMD dev wallet, or local dev mnemonics).
+- Request testnet funds via the built-in LocalNet faucet (ALGO and mUSD).
+- Execute paid MCP tool calls with automatic HTTP 402 negotiation, transaction signing, and settle-on-success verification.
+- Purchase and manage vendor-scoped subscription passes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Development
 
-## React Compiler
+The web interface connects to the FastAPI marketplace gateway running on `http://localhost:8800` (configured via `VITE_GATEWAY_URL` in `.env.local` or defaulting to `http://localhost:8800`).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Install Dependencies
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm ci
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Start Development Server
+
+Starts the Vite local development server on `http://localhost:5173`:
+
+```bash
+npm run dev
+```
+
+### Build for Production
+
+Compiles TypeScript and creates optimized static assets in `dist/`:
+
+```bash
+npm run build
+```
+
+### Run Tests
+
+Executes unit tests using Vitest:
+
+```bash
+npm test
+```

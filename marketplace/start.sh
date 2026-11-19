@@ -11,8 +11,10 @@ if [ -z "${VENV_PY:-}" ] || [ ! -x "$VENV_PY" ]; then
   if [ -x "$ROOT_DIR/.venv/bin/python" ]; then
     VENV_PY="$ROOT_DIR/.venv/bin/python"
   elif command -v python3 >/dev/null 2>&1; then
+    echo "WARNING: Virtual environment not found at $ROOT_DIR/.venv. Falling back to system python3 ($(command -v python3)). Run ./setup.sh to set up dependencies." >&2
     VENV_PY="$(command -v python3)"
   elif command -v python >/dev/null 2>&1; then
+    echo "WARNING: Virtual environment not found at $ROOT_DIR/.venv. Falling back to system python ($(command -v python)). Run ./setup.sh to set up dependencies." >&2
     VENV_PY="$(command -v python)"
   fi
 fi
