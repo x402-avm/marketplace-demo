@@ -1,0 +1,398 @@
+/* Trim bench for the video_edit_mcp service. Only vendor tokens (--s-*) carry colour and type. */
+.vtrim {
+  display: grid;
+  gap: 24px;
+}
+.vtrim :focus-visible {
+  outline: 2px solid var(--s-ink);
+  outline-offset: 2px;
+}
+.vtrim-h {
+  font-family: var(--s-display);
+  font-size: 1.5rem;
+  font-weight: 650;
+  line-height: 1.15;
+}
+.svc--nova .vtrim-h { font-style: italic; font-weight: 400; }
+.svc--quarry .vtrim-h { font-variation-settings: 'wdth' 72; font-weight: 850; }
+.svc--lumen .vtrim-h { font-weight: 400; }
+.vtrim-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.vtrim-label {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+.vtrim-note {
+  color: var(--s-muted);
+  font-size: 0.9375rem;
+  max-width: 64ch;
+}
+.vtrim-note--box {
+  padding: 28px 22px;
+  border: 1px dashed var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 12px);
+  color: var(--s-ink);
+}
+.vtrim-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 12px;
+  background: var(--s-field-bg);
+  color: var(--s-ink);
+  border: 1px solid var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 10px);
+  font: inherit;
+}
+.vtrim-input::placeholder {
+  color: var(--s-muted);
+  opacity: 1;
+}
+.vtrim-input:focus {
+  border-color: var(--s-ink);
+}
+.vtrim-input--num {
+  font-size: 1.35rem;
+  font-variant-numeric: tabular-nums;
+  max-width: 9rem;
+}
+.vtrim-btn {
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--s-field-border);
+  border-radius: var(--s-btn-radius);
+  background: transparent;
+  color: var(--s-ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.vtrim-btn:hover:not(:disabled) {
+  border-color: var(--s-ink);
+}
+.vtrim-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.vtrim-btn--small {
+  min-height: 36px;
+  padding: 5px 12px;
+  font-size: 0.875rem;
+}
+.vtrim .upload .btn {
+  min-height: 44px;
+  border-radius: var(--s-btn-radius);
+  background: var(--s-btn-bg);
+  color: var(--s-btn-ink);
+  border-color: var(--s-btn-border, var(--s-btn-bg));
+}
+
+/* ---- source ---- */
+.vtrim-source {
+  display: grid;
+  gap: 14px;
+}
+.vtrim-source__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px 28px;
+}
+.vtrim-source__path {
+  flex: 1 1 320px;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+.vtrim-source__path .vtrim-label {
+  font-weight: 400;
+  color: var(--s-muted);
+}
+.vtrim-source__pathrow {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---- bench: preview, timeline, numbers ---- */
+.vtrim-bench {
+  display: grid;
+  gap: 18px;
+  padding: 22px;
+  background: var(--s-panel);
+  border: 1px solid var(--s-rule);
+  border-radius: var(--s-panel-radius);
+  min-width: 0;
+}
+.svc--quarry .vtrim-bench { border-width: 2px; }
+.vtrim-preview {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  background: var(--s-bg);
+  border-radius: min(var(--s-panel-radius), 10px);
+}
+
+.vtrim-timeline {
+  padding: 10px 14px 0;
+}
+.vtrim-track {
+  position: relative;
+  height: 64px;
+  touch-action: none;
+  cursor: pointer;
+  user-select: none;
+}
+.vtrim-strip {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  border-radius: min(var(--s-panel-radius), 6px);
+  background: var(--s-rule);
+}
+.vtrim-strip img,
+.vtrim-strip__blank {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+.vtrim-strip__blank {
+  border-right: 1px solid var(--s-bg);
+}
+.vtrim-shade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--s-bg);
+  opacity: 0.78;
+  pointer-events: none;
+}
+.vtrim-keep {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  border-top: 3px solid var(--s-ink);
+  border-bottom: 3px solid var(--s-ink);
+  pointer-events: none;
+}
+.vtrim-playhead {
+  position: absolute;
+  top: -8px;
+  bottom: -8px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--s-ink);
+  box-shadow: 0 0 0 1px var(--s-bg);
+  pointer-events: none;
+}
+.vtrim-handle {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 16px;
+  display: grid;
+  place-items: center;
+  background: var(--s-ink);
+  cursor: ew-resize;
+  touch-action: none;
+}
+.vtrim-handle--start {
+  transform: translateX(-100%);
+  border-radius: min(var(--s-panel-radius), 6px) 0 0 min(var(--s-panel-radius), 6px);
+}
+.vtrim-handle--end {
+  border-radius: 0 min(var(--s-panel-radius), 6px) min(var(--s-panel-radius), 6px) 0;
+}
+.vtrim-handle::before {
+  content: '';
+  position: absolute;
+  inset: -6px -10px;
+}
+.vtrim-handle__grip {
+  width: 4px;
+  height: 22px;
+  border-left: 1px solid var(--s-bg);
+  border-right: 1px solid var(--s-bg);
+}
+.vtrim-handle:focus-visible {
+  outline: 3px solid var(--s-accent);
+  outline-offset: 1px;
+  box-shadow: 0 0 0 5px var(--s-ink);
+}
+.vtrim-handle[aria-disabled] {
+  cursor: default;
+  opacity: 0.6;
+}
+.vtrim-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.8125rem;
+  color: var(--s-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.vtrim-controls {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr);
+  gap: 18px 32px;
+  align-items: start;
+  padding-top: 16px;
+  border-top: 1px solid var(--s-rule);
+}
+.vtrim-time {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+.vtrim-sum {
+  justify-self: end;
+  text-align: right;
+  display: grid;
+  gap: 2px;
+  justify-items: end;
+}
+.vtrim-sum__len {
+  font-family: var(--s-display);
+  font-size: 2.6rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.svc--nova .vtrim-sum__len { font-style: italic; font-weight: 300; }
+.svc--quarry .vtrim-sum__len { font-variation-settings: 'wdth' 62; font-weight: 850; }
+.svc--lumen .vtrim-sum__len { font-weight: 250; }
+.vtrim-sum__detail {
+  color: var(--s-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 6px;
+}
+
+/* ---- action ---- */
+.vtrim-go {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.vtrim-go .svc__pay {
+  min-width: 280px;
+}
+.vtrim-problem {
+  font-weight: 650;
+  padding-left: 12px;
+  border-left: 4px solid var(--s-ink);
+}
+
+/* ---- output ---- */
+.vtrim-out {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+.vtrim-out > * {
+  justify-self: stretch;
+}
+.vtrim-out > .vtrim-btn {
+  justify-self: start;
+}
+.vtrim-out__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+.vtrim-out__fig {
+  margin: 0;
+  padding: 16px;
+  background: var(--s-panel);
+  border: 1px solid var(--s-rule);
+  border-radius: var(--s-panel-radius);
+  min-width: 0;
+}
+.vtrim-out__fig[data-testid='vtrim-result'] {
+  border-color: var(--s-ink);
+}
+.svc--quarry .vtrim-out__fig { border-width: 2px; }
+.vtrim-out__cap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.vtrim-out__title {
+  font-family: var(--s-display);
+  font-size: 1.2rem;
+  font-weight: 650;
+}
+.vtrim-out__dur {
+  font-variant-numeric: tabular-nums;
+  font-size: 1.2rem;
+}
+.vtrim-out__video {
+  display: block;
+  width: 100%;
+  background: var(--s-bg);
+  border-radius: min(var(--s-panel-radius), 8px);
+}
+.vtrim-out__file {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 0.875rem;
+}
+.vtrim-out__name {
+  color: var(--s-muted);
+  overflow-wrap: anywhere;
+}
+.vtrim-out__file a {
+  font-weight: 650;
+}
+.vtrim-fail {
+  padding: 16px 18px;
+  border: 1px solid var(--s-ink);
+  border-left-width: 6px;
+  border-radius: min(var(--s-panel-radius), 10px);
+}
+.vtrim-fail__what {
+  font-weight: 650;
+}
+
+@media (max-width: 760px) {
+  .vtrim-controls {
+    grid-template-columns: 1fr 1fr;
+  }
+  .vtrim-sum {
+    grid-column: 1 / -1;
+    justify-self: start;
+    text-align: left;
+    justify-items: start;
+  }
+  .vtrim-out__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 480px) {
+  .vtrim-bench {
+    padding: 14px;
+  }
+  .vtrim-go .svc__pay {
+    min-width: 0;
+    width: 100%;
+  }
+  .vtrim-go {
+    justify-items: stretch;
+  }
+  .vtrim-input--num {
+    max-width: none;
+  }
+}

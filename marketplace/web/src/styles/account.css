@@ -1,0 +1,215 @@
+/* ---------- history: a statement of receipt stubs ---------- */
+.statement__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px 32px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--graphite);
+}
+.statement__total {
+  font-size: var(--step-1);
+  color: var(--slate);
+}
+.statement__empty {
+  padding: 40px 0;
+  font-size: var(--step-1);
+  color: var(--slate);
+  max-width: 52ch;
+}
+.statement__day {
+  padding-top: 28px;
+}
+.statement__date {
+  font-size: var(--step-0);
+  font-weight: 650;
+  color: var(--slate);
+  margin-bottom: 10px;
+}
+.stubs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.stub {
+  display: grid;
+  grid-template-columns: 170px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 14px 18px 14px 22px;
+  background: var(--sheet);
+  border: 1px solid var(--pencil);
+  border-left: 6px solid var(--edge);
+}
+.stub__amount {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.stub__what {
+  display: grid;
+  min-width: 0;
+}
+.stub__tx {
+  font-size: 0.8125rem;
+}
+
+/* ---------- wallet: a passbook ---------- */
+.passbook {
+  max-width: 980px;
+}
+.passbook__title {
+  font-size: var(--step-4);
+}
+.passbook__lede {
+  margin-top: 14px;
+  font-size: var(--step-1);
+  color: var(--slate);
+  max-width: 52ch;
+}
+.providers {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--graphite);
+}
+.provider {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 4px 24px;
+  width: 100%;
+  padding: 20px 4px;
+  border: 0;
+  border-bottom: 1px solid var(--pencil);
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.provider:hover {
+  background: var(--sheet);
+}
+.provider__name {
+  font-size: var(--step-1);
+  font-weight: 650;
+}
+.provider__note {
+  color: var(--slate);
+}
+.passbook__account {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  padding-bottom: 28px;
+  border-bottom: 2px solid var(--graphite);
+}
+.passbook__addr {
+  margin: 14px 0 6px;
+  font-size: 1.05rem;
+  max-width: 44ch;
+  word-spacing: 0.15em;
+}
+.passbook__actions {
+  display: flex;
+  gap: 10px;
+}
+.passbook .notice {
+  margin-top: 20px;
+}
+.passbook__section {
+  padding: 32px 0 8px;
+}
+.passbook__section h2 {
+  margin-bottom: 14px;
+}
+.passbook__fine {
+  margin-top: 12px;
+  color: var(--slate);
+  font-size: 0.9375rem;
+  max-width: 64ch;
+}
+.holdings {
+  width: 100%;
+  border-collapse: collapse;
+  border-top: 1px solid var(--graphite);
+}
+.holdings th {
+  display: grid;
+  text-align: left;
+  font-size: var(--step-1);
+  font-weight: 650;
+  padding: 16px 0;
+}
+.holdings th span {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--slate);
+}
+.holdings td {
+  font-size: 1.6rem;
+  font-weight: 650;
+  text-align: right;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.holdings tr {
+  border-bottom: 1px solid var(--pencil);
+}
+.holdings__act {
+  width: 1%;
+  padding-left: 18px;
+}
+.passes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.pass {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px auto auto;
+  align-items: center;
+  gap: 8px 22px;
+  padding: 16px 18px;
+  background: var(--sheet);
+  border: 1px solid var(--pencil);
+  border-left: 6px solid var(--edge);
+}
+.pass__what {
+  display: grid;
+}
+.pass__meter {
+  height: 6px;
+  background: var(--pencil);
+}
+.pass__meter span {
+  display: block;
+  height: 100%;
+  background: var(--edge);
+}
+.pass__links {
+  display: flex;
+  gap: 14px;
+}
+
+@media (max-width: 760px) {
+  .stub,
+  .pass {
+    grid-template-columns: 1fr auto;
+  }
+  .stub__what,
+  .pass__what {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+  .provider {
+    grid-template-columns: 1fr;
+  }
+}

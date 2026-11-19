@@ -1,0 +1,677 @@
+/* ================================================= */
+/* GOOGLE GEMINI - CORE LAYOUT & STRUCTURE           */
+/* ================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ================================================= */
+/* APP HEADER - AUTHENTIC GOOGLE GEMINI              */
+/* ================================================= */
+.app-header {
+  height: var(--header-height);
+  background-color: rgba(19, 19, 20, 0.92);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Sidebar Toggle Button (Hamburger) */
+.sidebar-toggle-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* ================================================= */
+/* GOOGLE GEMINI SIDEBAR                             */
+/* ================================================= */
+.gemini-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background-color: #1a1a1c;
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem 0.75rem;
+  gap: 0.85rem;
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1), min-width 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease, padding 0.25s ease;
+  overflow: hidden;
+  position: relative;
+  z-index: 80;
+  user-select: none;
+}
+
+.gemini-sidebar.collapsed {
+  width: 0 !important;
+  min-width: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-right: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar-top-bar {
+  width: 100%;
+}
+
+.btn-new-chat {
+  width: 100%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.btn-new-chat:hover {
+  background: var(--bg-surface-hover);
+  border-color: var(--gemini-purple);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(155, 114, 203, 0.25);
+}
+
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.5rem 0.15rem 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.sessions-list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-right: 2px;
+}
+
+.session-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: 1px solid transparent;
+  gap: 0.4rem;
+}
+
+.session-list-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.session-list-item.active {
+  background: rgba(66, 133, 244, 0.12);
+  border-color: rgba(66, 133, 244, 0.35);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.session-item-main {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.session-sparkle-icon {
+  color: var(--gemini-purple);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.session-text-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.session-title {
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.session-time {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+.session-item-actions {
+  display: none;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.session-list-item:hover .session-item-actions {
+  display: flex;
+}
+
+.session-action-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.76rem;
+  cursor: pointer;
+  padding: 0.15rem 0.25rem;
+  border-radius: 4px;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+}
+
+.session-action-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.brand-logo-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: var(--gemini-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 16px rgba(155, 114, 203, 0.45);
+  animation: logo-glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes logo-glow {
+  0% { box-shadow: 0 0 10px rgba(66, 133, 244, 0.35); }
+  50% { box-shadow: 0 0 18px rgba(155, 114, 203, 0.55); }
+  100% { box-shadow: 0 0 12px rgba(217, 101, 112, 0.4); }
+}
+
+.brand-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: var(--brand-gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.01em;
+}
+
+.brand-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: var(--radius-pill);
+  background: rgba(249, 171, 0, 0.12);
+  color: var(--banana-gold);
+  border: 1px solid rgba(249, 171, 0, 0.28);
+  letter-spacing: 0.04em;
+}
+
+/* Gemini Navigation Tabs */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: var(--bg-secondary);
+  padding: 0.25rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+}
+
+.nav-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.18s ease;
+  font-family: inherit;
+}
+
+.nav-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nav-tab-btn.active {
+  color: #ffffff;
+  background: var(--border-subtle);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Hardware Telemetry Badge in Header */
+.hardware-status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.hardware-status-badge:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-sm);
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-success);
+  box-shadow: 0 0 8px var(--color-success);
+  animation: pulse-dot 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.hardware-chip-info {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.isolation-pill {
+  font-size: 0.66rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-pill);
+  background: rgba(52, 168, 83, 0.12);
+  color: var(--color-success);
+  border: 1px solid rgba(52, 168, 83, 0.3);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ================================================= */
+/* MAIN VIEWPORT                                     */
+/* ================================================= */
+.app-main {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - var(--header-height));
+}
+
+.tab-content-panel {
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.tab-content-panel.active {
+  display: flex;
+}
+
+/* ================================================= */
+/* TAB 1: CONVERSATIONAL STUDIO FEED & FLOATING DOCK */
+/* ================================================= */
+#tab-generate {
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  background: radial-gradient(circle at 50% 15%, rgba(66, 133, 244, 0.04) 0%, transparent 60%);
+}
+
+/* Central Conversational Studio Feed */
+.gemini-feed-container {
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 170px 1.5rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  scroll-behavior: smooth;
+}
+
+/* Workspace Canvas Area (Preview Area) */
+.workspace-canvas-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+/* Floating Pill Prompt Dock (Signature Google Gemini design) */
+.gemini-prompt-bar-container {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 36px);
+  max-width: 840px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  pointer-events: none;
+}
+
+.gemini-prompt-bar-container > * {
+  pointer-events: auto;
+}
+
+/* Options Drawer (Above Pill) */
+.prompt-options-drawer {
+  width: 100%;
+  background: rgba(30, 31, 32, 0.98);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-lg);
+  padding: 1rem 1.25rem;
+  display: none;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 0.4rem;
+  animation: slide-up-fade 0.2s ease-out;
+}
+
+.prompt-options-drawer.open {
+  display: flex;
+}
+
+@keyframes slide-up-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Floating Pill Itself */
+.gemini-prompt-pill {
+  width: 100%;
+  background: var(--bg-pill);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-pill);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.gemini-prompt-pill:focus-within {
+  border-color: rgba(66, 133, 244, 0.7);
+  box-shadow: 0 0 0 1px rgba(66, 133, 244, 0.35), 0 0 24px rgba(155, 114, 203, 0.25), var(--shadow-pill);
+}
+
+/* Edit Reference Chip inside Dock */
+.edit-reference-chip-bar {
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem 0 1rem;
+}
+
+.edit-reference-chip-bar.active {
+  display: flex;
+}
+
+.edit-reference-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(66, 133, 244, 0.12);
+  border: 1px solid rgba(66, 133, 244, 0.35);
+  padding: 0.2rem 0.65rem 0.2rem 0.35rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  color: #93c5fd;
+  max-width: 100%;
+}
+
+.edit-reference-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.edit-reference-close-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 0 0.2rem;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s ease;
+}
+
+.edit-reference-close-btn:hover {
+  color: #ffffff;
+}
+
+/* Pill Input Row */
+.pill-input-row {
+  display: flex;
+  align-items: flex-end;
+  padding: 0.5rem 0.85rem;
+  gap: 0.6rem;
+}
+
+.pill-action-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.pill-action-btn:hover {
+  background: var(--bg-tertiary);
+  border-color: var(--border-subtle);
+  color: var(--text-primary);
+}
+
+.pill-action-btn.active {
+  color: var(--gemini-purple);
+  background: rgba(155, 114, 203, 0.15);
+  border-color: rgba(155, 114, 203, 0.3);
+}
+
+/* Pill Bottom Meta Subbar */
+.gemini-prompt-subbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem 0.5rem 1rem;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.prompt-bar-footer-caption {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-align: center;
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+}
+
+/* ================================================= */
+/* TAB 2: STUDIO & CANVAS SPLIT PANE                 */
+/* ================================================= */
+.workspace-split-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.workspace-sidebar {
+  width: 380px;
+  min-width: 320px;
+  max-width: 440px;
+  background-color: var(--bg-secondary);
+  border-left: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 1.25rem;
+  gap: 1.15rem;
+}
+
+/* Responsive Rules */
+@media (max-width: 960px) {
+  .app-header {
+    height: auto;
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .header-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .gemini-prompt-bar-container {
+    width: calc(100% - 20px);
+    bottom: 12px;
+  }
+  .workspace-split-container {
+    flex-direction: column;
+  }
+  .workspace-sidebar {
+    width: 100%;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    height: auto;
+  }
+}

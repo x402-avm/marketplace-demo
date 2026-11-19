@@ -1,0 +1,423 @@
+/* Voice booth for the tts service. Only vendor tokens (--s-*) carry colour and type. */
+.tts {
+  display: grid;
+  gap: 28px;
+}
+.tts :focus-visible {
+  outline: 2px solid var(--s-ink);
+  outline-offset: 2px;
+}
+.tts-h {
+  display: block;
+  font-family: var(--s-display);
+  font-size: 1.5rem;
+  font-weight: 650;
+  line-height: 1.15;
+  padding: 0;
+}
+.svc--nova .tts-h { font-style: italic; font-weight: 400; }
+.svc--quarry .tts-h { font-variation-settings: 'wdth' 72; font-weight: 850; }
+.svc--lumen .tts-h { font-weight: 400; }
+.tts-hint {
+  margin-top: 4px;
+  color: var(--s-muted);
+  font-size: 0.9375rem;
+  max-width: 60ch;
+}
+
+.tts-desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* ---- the script ---- */
+.tts-script,
+.tts-cast {
+  min-width: 0;
+  margin: 0;
+  padding: 24px;
+  background: var(--s-panel);
+  border: 1px solid var(--s-rule);
+  border-radius: var(--s-panel-radius);
+}
+.svc--quarry .tts-script,
+.svc--quarry .tts-cast,
+.svc--quarry .tts-take.is-latest {
+  border-width: 2px;
+}
+.tts-text {
+  display: block;
+  width: 100%;
+  min-height: 248px;
+  margin-top: 14px;
+  padding: 18px 20px;
+  resize: vertical;
+  background: var(--s-field-bg);
+  color: var(--s-ink);
+  border: 1px solid var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 12px);
+  font-family: var(--s-display);
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+.svc--nova .tts-text { line-height: 1.65; }
+.tts-text::placeholder {
+  color: var(--s-muted);
+  opacity: 1;
+}
+.tts-text:focus {
+  border-color: var(--s-ink);
+}
+.tts-text:disabled {
+  opacity: 0.75;
+}
+
+.tts-meter {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  margin-top: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.tts-meter__track {
+  grid-column: 1 / -1;
+  height: 4px;
+  background: var(--s-rule);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.tts-meter__fill {
+  display: block;
+  height: 100%;
+  background: var(--s-ink);
+  transition: width 0.12s linear;
+}
+.tts-meter.is-over .tts-meter__fill {
+  background: repeating-linear-gradient(135deg, var(--s-ink) 0 6px, transparent 6px 10px);
+}
+.tts-meter__count,
+.tts-meter__time {
+  font-size: 0.9375rem;
+}
+.tts-meter__time {
+  color: var(--s-muted);
+  text-align: right;
+}
+.tts-meter.is-over .tts-meter__count {
+  font-weight: 650;
+}
+
+.tts-go {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--s-rule);
+}
+.tts-go__who {
+  color: var(--s-muted);
+}
+.tts-go__who strong {
+  color: var(--s-ink);
+}
+.tts-go .svc__pay {
+  min-width: 220px;
+}
+
+/* ---- the cast of voices ---- */
+.tts-cast legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 14px;
+}
+.tts-cast__group + .tts-cast__group {
+  margin-top: 18px;
+}
+.tts-cast__group,
+.tts-cast__more {
+  clear: both;
+}
+.tts-cast__title {
+  margin-bottom: 8px;
+  font-weight: 650;
+  font-size: 0.9375rem;
+}
+.tts-cast__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tts-voice {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+.tts-voice input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.tts-voice__face {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 12px;
+  border: 1px solid var(--s-field-border);
+  border-radius: var(--s-btn-radius);
+  background: var(--s-field-bg);
+  line-height: 1.3;
+}
+.tts-voice__name {
+  font-weight: 600;
+}
+.tts-voice__kind {
+  font-size: 0.8125rem;
+  color: var(--s-muted);
+}
+.tts-voice:hover .tts-voice__face {
+  border-color: var(--s-ink);
+}
+.tts-voice.is-on .tts-voice__face {
+  background: var(--s-ink);
+  border-color: var(--s-ink);
+  color: var(--s-bg);
+}
+.tts-voice.is-on .tts-voice__kind {
+  color: var(--s-bg);
+}
+.tts-voice input:focus-visible + .tts-voice__face {
+  outline: 2px solid var(--s-ink);
+  outline-offset: 2px;
+}
+.tts-cast:disabled .tts-voice {
+  cursor: default;
+  opacity: 0.7;
+}
+.tts-cast__more {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--s-rule);
+}
+.tts-cast__more summary {
+  cursor: pointer;
+  font-weight: 650;
+  font-size: 0.9375rem;
+}
+.tts-cast__more .tts-hint {
+  margin: 6px 0 10px;
+  font-size: 0.875rem;
+}
+
+/* ---- takes ---- */
+.tts-takes__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 24px;
+  margin-bottom: 14px;
+}
+.tts-takes__list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tts-take {
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: 6px 20px;
+  align-items: center;
+  padding: 14px 18px;
+  border-top: 1px solid var(--s-rule);
+}
+.tts-take.is-latest {
+  padding: 20px 22px;
+  background: var(--s-panel);
+  border: 1px solid var(--s-rule);
+  border-radius: var(--s-panel-radius);
+}
+.tts-take__meta {
+  display: grid;
+  gap: 2px;
+}
+.tts-take__n {
+  font-size: 0.875rem;
+  color: var(--s-muted);
+  font-variant-numeric: tabular-nums;
+}
+.tts-take__voice {
+  font-family: var(--s-display);
+  font-size: 1.2rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+.tts-take__line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--s-muted);
+  font-style: italic;
+}
+.tts-take__player {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+}
+.tts-take__play {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--s-btn-border, transparent);
+  border-radius: var(--s-btn-radius);
+  background: var(--s-btn-bg);
+  color: var(--s-btn-ink);
+  cursor: pointer;
+}
+.svc--fern .tts-take__play,
+.svc--lumen .tts-take__play {
+  border-radius: 50%;
+}
+.tts-take__player--large .tts-take__play {
+  width: 56px;
+  height: 56px;
+}
+.tts-take__wave {
+  position: relative;
+  height: 44px;
+  min-width: 0;
+  cursor: pointer;
+  touch-action: none;
+  color: var(--s-ink);
+}
+.tts-take__player--large .tts-take__wave {
+  height: 88px;
+}
+.tts-take__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--s-ink);
+}
+.tts-take__time {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  font-size: 0.9375rem;
+}
+.tts-take__of {
+  color: var(--s-muted);
+}
+.tts-take__err {
+  white-space: normal;
+  font-weight: 650;
+}
+.tts-take__dl {
+  font-weight: 650;
+  white-space: nowrap;
+  text-underline-offset: 3px;
+}
+
+.tts-take--pending {
+  padding: 20px 22px;
+  border: 1px dashed var(--s-field-border);
+  border-radius: var(--s-panel-radius);
+}
+.tts-take--pending .tts-take__line {
+  white-space: normal;
+  font-style: normal;
+  color: var(--s-ink);
+}
+.tts-take__pulse {
+  grid-column: 1 / -1;
+  height: 44px;
+  background: repeating-linear-gradient(90deg, var(--s-rule) 0 2px, transparent 2px 5px);
+  mask-image: linear-gradient(90deg, transparent, #000 30%, #000 70%, transparent);
+  mask-size: 200% 100%;
+  animation: tts-scan 1.6s linear infinite;
+}
+@keyframes tts-scan {
+  from { mask-position: 100% 0; }
+  to { mask-position: -100% 0; }
+}
+
+.tts-fail {
+  padding: 16px 18px;
+  border: 1px solid var(--s-ink);
+  border-left-width: 6px;
+  border-radius: min(var(--s-panel-radius), 10px);
+  margin-bottom: 14px;
+}
+.tts-fail__what {
+  font-weight: 650;
+}
+.tts-fail__why {
+  margin-top: 4px;
+  color: var(--s-muted);
+  overflow-wrap: anywhere;
+}
+.tts-empty {
+  padding: 22px 0;
+  border-top: 1px solid var(--s-rule);
+  color: var(--s-muted);
+  max-width: 62ch;
+}
+
+@media (max-width: 860px) {
+  .tts-desk {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .tts-script,
+  .tts-cast {
+    padding: 18px 16px;
+  }
+  .tts-text {
+    min-height: 200px;
+    font-size: 1.15rem;
+    padding: 14px;
+  }
+  .tts-go .svc__pay {
+    width: 100%;
+  }
+  .tts-take,
+  .tts-take.is-latest {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 14px;
+  }
+  .tts-take__player {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .tts-take__time {
+    grid-column: 1;
+  }
+  .tts-take__dl {
+    justify-self: end;
+  }
+  .tts-meter__time {
+    text-align: left;
+    grid-column: 1 / -1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tts-take__pulse {
+    animation: none;
+    mask-image: none;
+  }
+  .tts-meter__fill {
+    transition: none;
+  }
+}

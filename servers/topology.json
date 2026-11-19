@@ -1,0 +1,194 @@
+{
+  "tts": {
+    "name": "Kokoro TTS",
+    "tool_type": "generate_speech",
+    "runtime_port": 8050,
+    "proxy_ports": [
+      8051,
+      8052,
+      8053,
+      8054
+    ],
+    "num_proxies": 4
+  },
+  "image_gen": {
+    "name": "SD Image Gen",
+    "tool_type": "generate_image",
+    "runtime_port": 10000,
+    "proxy_ports": [
+      10002,
+      10003,
+      10004
+    ],
+    "num_proxies": 3
+  },
+  "web_mcp": {
+    "name": "Web MCP",
+    "tool_type": "web_tools",
+    "runtime_port": 8059,
+    "proxy_ports": [
+      8060,
+      8061,
+      8062,
+      8063
+    ],
+    "num_proxies": 4
+  },
+  "invoice_mcp": {
+    "name": "Invoice MCP",
+    "tool_type": "generate_invoice",
+    "runtime_port": 8064,
+    "proxy_ports": [
+      8065,
+      8066,
+      8067,
+      8068,
+      8069
+    ],
+    "num_proxies": 5
+  },
+  "domain_mcp": {
+    "name": "Domain Recon",
+    "tool_type": "domain_tools",
+    "runtime_port": 8070,
+    "proxy_ports": [
+      8071,
+      8072,
+      8073,
+      8074
+    ],
+    "num_proxies": 4
+  },
+  "yt_mcp": {
+    "name": "YouTube MCP",
+    "tool_type": "yt_tools",
+    "runtime_port": 8075,
+    "proxy_ports": [
+      8076,
+      8077,
+      8078,
+      8079
+    ],
+    "num_proxies": 4
+  },
+  "sandbox_mcp": {
+    "name": "Code Sandbox",
+    "tool_type": "run_sandbox_code",
+    "runtime_port": 8081,
+    "proxy_ports": [
+      8082,
+      8083,
+      8084,
+      8085,
+      8086
+    ],
+    "num_proxies": 5
+  },
+  "latex_mcp": {
+    "name": "LaTeX Compiler",
+    "tool_type": "compile_latex_to_pdf",
+    "runtime_port": 8087,
+    "proxy_ports": [
+      8088,
+      8089,
+      8090
+    ],
+    "num_proxies": 3
+  },
+  "conversion_mcp": {
+    "name": "File Conversion",
+    "tool_type": "conversion_tools",
+    "runtime_port": 8091,
+    "proxy_ports": [
+      8092,
+      8093,
+      8094,
+      8095
+    ],
+    "num_proxies": 4
+  },
+  "ocr_mcp": {
+    "name": "OCR MCP",
+    "tool_type": "ocr_tools",
+    "runtime_port": 8096,
+    "proxy_ports": [
+      8097,
+      8098
+    ],
+    "num_proxies": 2
+  },
+  "resume_mcp": {
+    "name": "Resume MCP",
+    "tool_type": "resume_tools",
+    "runtime_port": 8099,
+    "proxy_ports": [
+      8100,
+      8101,
+      8102,
+      8103,
+      8104
+    ],
+    "num_proxies": 5
+  },
+  "pdf_mcp": {
+    "name": "Python PDF MCP",
+    "tool_type": "pdf_tools",
+    "runtime_port": 8105,
+    "proxy_ports": [
+      8106,
+      8107,
+      8108,
+      8109,
+      8110
+    ],
+    "num_proxies": 5
+  },
+  "pdf_reader_mcp": {
+    "name": "Rust PDF Reader",
+    "tool_type": "pdf_reader_tools",
+    "runtime_port": 8111,
+    "proxy_ports": [
+      8112,
+      8113
+    ],
+    "num_proxies": 2
+  },
+  "image_edit_mcp": {
+    "name": "Image Edit MCP",
+    "tool_type": "image_edit_tools",
+    "runtime_port": 8114,
+    "proxy_ports": [
+      8115,
+      8116,
+      8117,
+      8118
+    ],
+    "num_proxies": 4
+  },
+  "video_edit_mcp": {
+    "name": "Video Edit MCP",
+    "tool_type": "video_edit_tools",
+    "runtime_port": 8119,
+    "proxy_ports": [
+      8120,
+      8121,
+      8122,
+      8123,
+      8124
+    ],
+    "num_proxies": 5
+  },
+  "paper_mcp": {
+    "name": "arXiv Paper MCP",
+    "tool_type": "paper_tools",
+    "runtime_port": 8125,
+    "proxy_ports": [
+      8126,
+      8127,
+      8128,
+      8129,
+      8130
+    ],
+    "num_proxies": 5
+  }
+}

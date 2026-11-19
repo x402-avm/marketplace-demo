@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gateway-tests:
+    name: Gateway Tests (Offline & Security)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r marketplace/gateway/requirements.txt
+          pip install pytest pytest-asyncio
+      - name: Run offline and security tests
+        run: |
+          cd marketplace/gateway
+          pytest tests/test_offline.py tests/test_security.py
+
+  chain-tests:
+    name: Chain Offline Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install py-algorand-sdk pytest pytest-asyncio
+      - name: Run chain offline tests
+        run: |
+          cd chain
+          pytest tests/
+
+  web-tests:
+    name: Web Frontend Build & Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: |
+          cd marketplace/web
+          npm ci
+      - name: Typecheck and build
+        run: |
+          cd marketplace/web
+          npm run build
+      - name: Run unit tests
+        run: |
+          cd marketplace/web
+          npm test

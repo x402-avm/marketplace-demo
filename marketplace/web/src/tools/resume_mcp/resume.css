@@ -1,0 +1,428 @@
+/* Resume desk: your material on the left, the six actions grouped by what they read on the right,
+   and a result shaped for whichever action ran. Vendor tokens only. */
+.resume_mcp {
+  min-width: 0;
+}
+.resume_mcp :where(button, a, input, textarea):focus-visible {
+  outline: 2px solid var(--s-ink);
+  outline-offset: 2px;
+}
+.resume_mcp__desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+.resume_mcp__material,
+.resume_mcp__actions {
+  min-width: 0;
+}
+.resume_mcp__h {
+  font-family: var(--s-display);
+  font-size: 1.5rem;
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.resume_mcp__h3 {
+  font-family: var(--s-display);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+/* material */
+.resume_mcp__field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.resume_mcp__labrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+.resume_mcp__lab {
+  font-weight: 650;
+}
+.resume_mcp__opt {
+  font-weight: 400;
+  color: var(--s-muted);
+}
+.resume_mcp__tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.resume_mcp__quiet {
+  min-height: 36px;
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: var(--s-btn-radius);
+  background: transparent;
+  color: var(--s-ink);
+  font: inherit;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.resume_mcp__quiet:hover:not(:disabled) {
+  border-color: var(--s-field-border);
+}
+.resume_mcp__quiet:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.resume_mcp__quiet--boxed {
+  border-color: var(--s-field-border);
+  text-decoration: none;
+  padding: 6px 16px;
+}
+.resume_mcp__area {
+  width: 100%;
+  min-height: 7.5rem;
+  padding: 12px 14px;
+  border: 1px solid var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 10px);
+  background: var(--s-field-bg);
+  color: var(--s-ink);
+  font: inherit;
+  line-height: 1.5;
+  resize: vertical;
+}
+.resume_mcp__area--tall {
+  min-height: 20rem;
+}
+.resume_mcp__area::placeholder {
+  color: var(--s-muted);
+  opacity: 1;
+}
+.resume_mcp__area:focus {
+  border-color: var(--s-ink);
+}
+.resume_mcp__hint {
+  color: var(--s-muted);
+  font-size: 0.875rem;
+}
+
+/* actions: grouped by what they read */
+.resume_mcp__group {
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.resume_mcp__legend {
+  padding: 0;
+  margin-bottom: 4px;
+  color: var(--s-muted);
+  font-size: 0.875rem;
+}
+.resume_mcp__choice {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'dot name price'
+    '. gives gives';
+  gap: 0 12px;
+  align-items: baseline;
+  padding: 10px 12px;
+  border-top: 1px solid var(--s-rule);
+  cursor: pointer;
+}
+.resume_mcp__group .resume_mcp__choice:last-child {
+  border-bottom: 1px solid var(--s-rule);
+}
+.resume_mcp__choice input {
+  grid-area: dot;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--s-ink);
+  align-self: center;
+}
+.resume_mcp__choice:has(input:focus-visible) {
+  outline: 2px solid var(--s-ink);
+  outline-offset: -2px;
+}
+.resume_mcp__choice input:focus-visible {
+  outline: none;
+}
+.resume_mcp__cname {
+  grid-area: name;
+  font-weight: 600;
+}
+.resume_mcp__cprice {
+  grid-area: price;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.resume_mcp__cgives {
+  grid-area: gives;
+  color: var(--s-muted);
+  font-size: 0.9375rem;
+}
+.resume_mcp__choice.is-picked {
+  background: var(--s-ink);
+  color: var(--s-bg);
+  border-radius: min(var(--s-panel-radius), 10px);
+  border-top-color: transparent;
+}
+.resume_mcp__choice.is-picked + .resume_mcp__choice {
+  border-top-color: transparent;
+}
+.resume_mcp__choice.is-picked .resume_mcp__cgives {
+  color: var(--s-bg);
+}
+.resume_mcp__choice.is-picked input {
+  accent-color: var(--s-bg);
+}
+.resume_mcp__go {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+.resume_mcp__missing {
+  padding: 8px 12px;
+  border: 2px solid var(--s-ink);
+  border-radius: min(var(--s-panel-radius), 10px);
+  font-size: 0.9375rem;
+}
+
+/* result */
+.resume_mcp__out {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 2px solid var(--s-ink);
+  min-width: 0;
+}
+.resume_mcp__wait {
+  color: var(--s-muted);
+}
+.resume_mcp__err {
+  font-weight: 600;
+}
+.resume_mcp__score {
+  display: grid;
+  grid-template-columns: minmax(10rem, auto) minmax(0, 1fr);
+  gap: 20px 48px;
+  align-items: start;
+}
+.resume_mcp__big {
+  display: grid;
+  line-height: 1;
+}
+.resume_mcp__bignum {
+  font-family: var(--s-display);
+  font-size: clamp(5rem, 14vw, 9rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+.resume_mcp__bigof {
+  margin-top: 8px;
+  color: var(--s-muted);
+  font-size: 1rem;
+  max-width: 14ch;
+  line-height: 1.3;
+}
+.resume_mcp__breakdown {
+  display: grid;
+  gap: 22px;
+  min-width: 0;
+}
+.resume_mcp__parts {
+  width: 100%;
+  border-collapse: collapse;
+}
+.resume_mcp__cap {
+  text-align: left;
+  font-family: var(--s-display);
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+.resume_mcp__parts th,
+.resume_mcp__parts td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--s-rule);
+  vertical-align: middle;
+}
+.resume_mcp__parts th {
+  text-align: left;
+  font-weight: 600;
+}
+.resume_mcp__pdetail {
+  display: block;
+  font-weight: 400;
+  color: var(--s-muted);
+  font-size: 0.875rem;
+}
+.resume_mcp__barcell {
+  width: 38%;
+  padding: 0 16px !important;
+}
+.resume_mcp__bar {
+  display: block;
+  height: 8px;
+  background: var(--s-rule);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.resume_mcp__fill {
+  display: block;
+  height: 100%;
+  background: var(--s-ink);
+  border-radius: inherit;
+}
+.resume_mcp__pts {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.resume_mcp__pen th,
+.resume_mcp__pen td {
+  font-style: italic;
+}
+.resume_mcp__tips ul,
+.resume_mcp__suggest {
+  margin: 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 6px;
+  max-width: 68ch;
+}
+.resume_mcp__suggest {
+  padding: 0;
+  list-style: none;
+  gap: 0;
+}
+.resume_mcp__suggest li {
+  padding: 12px 0 12px 16px;
+  border-bottom: 1px solid var(--s-rule);
+  border-left: 3px solid var(--s-ink);
+  margin-bottom: 8px;
+}
+.resume_mcp__ok {
+  font-size: 1.2rem;
+}
+.resume_mcp__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.resume_mcp__chip {
+  padding: 4px 12px;
+  border: 1px solid var(--s-ink);
+  border-radius: var(--s-btn-radius);
+  font-weight: 600;
+}
+.resume_mcp__chip--missing {
+  border-style: dashed;
+  font-weight: 400;
+}
+.resume_mcp__chips + .resume_mcp__hint {
+  margin-top: 8px;
+}
+
+/* the letter reads like a letter */
+.resume_mcp__letter {
+  max-width: 62ch;
+  padding: clamp(20px, 4vw, 40px);
+  background: var(--s-field-bg);
+  border: 1px solid var(--s-rule);
+  border-radius: min(var(--s-panel-radius), 10px);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.resume_mcp__letter p + p {
+  margin-top: 1em;
+}
+.resume_mcp__copyrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  margin-top: 12px;
+}
+
+/* files the service produced. The white is the produced page's own paper, not a vendor colour. */
+.resume_mcp__frame {
+  display: block;
+  width: 100%;
+  height: 36rem;
+  border: 1px solid var(--s-rule);
+  border-radius: min(var(--s-panel-radius), 10px);
+  background: #fff;
+}
+.resume_mcp__frame--page {
+  height: 26rem;
+}
+.resume_mcp__fallback {
+  padding: 18px;
+  color: #222;
+}
+.resume_mcp__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+.resume_mcp__links a {
+  text-underline-offset: 3px;
+}
+
+/* vendor tuning */
+.svc--nova .resume_mcp__h,
+.svc--nova .resume_mcp__h3,
+.svc--nova .resume_mcp__cap {
+  font-style: italic;
+  font-weight: 400;
+}
+.svc--nova .resume_mcp__bignum {
+  font-weight: 300;
+  font-style: italic;
+}
+.svc--fern .resume_mcp__bignum {
+  font-weight: 800;
+}
+.svc--quarry .resume_mcp__h {
+  font-variation-settings: 'wdth' 72;
+  font-weight: 850;
+}
+.svc--quarry .resume_mcp__bignum {
+  font-variation-settings: 'wdth' 62;
+  font-weight: 870;
+}
+.svc--lumen .resume_mcp__bignum {
+  font-weight: 200;
+}
+
+@media (max-width: 900px) {
+  .resume_mcp__desk {
+    grid-template-columns: 1fr;
+  }
+  .resume_mcp__area--tall {
+    min-height: 14rem;
+  }
+}
+@media (max-width: 640px) {
+  .resume_mcp__score {
+    grid-template-columns: 1fr;
+  }
+  .resume_mcp__big {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .resume_mcp__barcell {
+    display: none;
+  }
+  .resume_mcp__frame {
+    height: 28rem;
+  }
+}

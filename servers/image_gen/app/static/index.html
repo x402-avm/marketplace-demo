@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gemini Nano Banana — Image Gen & Edit Engine</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-brand">
+        <div class="brand-sparkle">✨</div>
+        <div class="brand-text">
+          <h1>Gemini Nano <span class="brand-banana">Banana</span></h1>
+          <p class="tagline">Next-Gen Local Image Generation & AI Editing</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <div class="badge badge-cpu">
+          <span class="dot"></span>
+          <span id="badge-cpu-name">AMD Ryzen AI 9 HX 370 (24T)</span>
+        </div>
+        <div class="badge badge-gpu-isolated">
+          <span class="shield">🛡️</span>
+          <span>dGPU RTX 4070 Isolated</span>
+        </div>
+        <div class="badge badge-status">
+          <span class="status-indicator"></span>
+          <span>Engine Active</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" data-tab="tab-generate">
+        <span class="icon">🎨</span> Text to Image
+      </button>
+      <button class="tab-btn" data-tab="tab-edit">
+        <span class="icon">✨</span> Image Edit & Transform
+      </button>
+      <button class="tab-btn" data-tab="tab-agents">
+        <span class="icon">🤖</span> Agent Orchestrator
+      </button>
+      <button class="tab-btn" data-tab="tab-telemetry">
+        <span class="icon">📊</span> System Telemetry
+      </button>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="app-main">
+      <!-- TAB 1: TEXT TO IMAGE -->
+      <section id="tab-generate" class="tab-pane active">
+        <div class="split-view">
+          <!-- Control Panel -->
+          <div class="panel control-panel">
+            <div class="panel-section">
+              <div class="section-header">
+                <label for="prompt-input">Prompt</label>
+                <button type="button" id="btn-optimize-prompt" class="btn-ghost-small">
+                  <span>✨ AI Optimize</span>
+                </button>
+              </div>
+              <div class="prompt-box-wrapper">
+                <textarea id="prompt-input" rows="4" placeholder="Describe what you want to create... (e.g. A futuristic sports car racing through neon Tokyo rain, 8k resolution)"></textarea>
+              </div>
+            </div>
+
+            <!-- Style Presets -->
+            <div class="panel-section">
+              <label>Style Aesthetic</label>
+              <div class="chips-container" id="style-chips">
+                <button type="button" class="chip active" data-style="photorealistic">📸 Photorealistic</button>
+                <button type="button" class="chip" data-style="cinematic_8k">🎬 Cinematic 8K</button>
+                <button type="button" class="chip" data-style="anime_manga">🌸 Anime Masterwork</button>
+                <button type="button" class="chip" data-style="studio_portrait">👤 Studio Portrait</button>
+                <button type="button" class="chip" data-style="cyberpunk">🏙️ Cyberpunk</button>
+                <button type="button" class="chip" data-style="fantasy_oil">🎨 Fantasy Oil</button>
+                <button type="button" class="chip" data-style="analog_film">🎞️ Analog 35mm</button>
+              </div>
+            </div>
+
+            <!-- Aspect Ratios -->
+            <div class="panel-section">
+              <label>Aspect Ratio</label>
+              <div class="aspect-selector" id="aspect-selector">
+                <button type="button" class="aspect-btn active" data-aspect="1:1">
+                  <div class="aspect-preview sq-1-1"></div>
+                  <span>1:1 Square</span>
+                </button>
+                <button type="button" class="aspect-btn" data-aspect="16:9">
+                  <div class="aspect-preview ls-16-9"></div>
+                  <span>16:9 Landscape</span>
+                </button>
+                <button type="button" class="aspect-btn" data-aspect="9:16">
+                  <div class="aspect-preview pt-9-16"></div>
+                  <span>9:16 Portrait</span>
+                </button>
+                <button type="button" class="aspect-btn" data-aspect="4:3">
+                  <div class="aspect-preview st-4-3"></div>
+                  <span>4:3 Standard</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Advanced Accordion -->
+            <details class="advanced-details">
+              <summary>Advanced Inference Settings</summary>
+              <div class="advanced-body">
+                <div class="form-group">
+                  <label for="negative-prompt-input">Negative Prompt</label>
+                  <textarea id="negative-prompt-input" rows="2" placeholder="Elements to exclude (artifacts, blurry, bad anatomy...)"></textarea>
+                </div>
+                <div class="grid-2">
+                  <div class="form-group">
+                    <label for="steps-input">Steps: <span id="steps-val">15</span></label>
+                    <input type="range" id="steps-input" min="5" max="30" value="15">
+                  </div>
+                  <div class="form-group">
+                    <label for="guidance-input">CFG Scale: <span id="guidance-val">7.5</span></label>
+                    <input type="range" id="guidance-input" min="1.0" max="15.0" step="0.5" value="7.5">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="seed-input">Seed (-1 for random)</label>
+                  <input type="number" id="seed-input" placeholder="-1" value="-1">
+                </div>
+                <div class="toggles-row">
+                  <label class="toggle-label">
+                    <input type="checkbox" id="toggle-auto-opt" checked>
+                    <span>AI Prompt Expansion</span>
+                  </label>
+                  <label class="toggle-label">
+                    <input type="checkbox" id="toggle-run-qa" checked>
+                    <span>Automated QA Audit</span>
+                  </label>
+                </div>
+              </div>
+            </details>
+
+            <button type="button" id="btn-generate" class="btn-primary-action">
+              <span>🚀 Generate Image on Ryzen CPU</span>
+            </button>
+          </div>
+
+          <!-- Display / Canvas Panel -->
+          <div class="panel canvas-panel">
+            <div id="gen-loading-state" class="state-overlay hidden">
+              <div class="spinner-banana"></div>
+              <p id="loading-stage">Diffusing on AMD Ryzen AI 9 HX 370...</p>
+              <div class="progress-bar-container">
+                <div id="gen-progress-fill" class="progress-bar-fill"></div>
+              </div>
+            </div>
+
+            <div id="gen-empty-state" class="empty-state">
+              <div class="empty-icon">🎨</div>
+              <h3>Ready to Create</h3>
+              <p>Type a prompt and let the Gemini Nano multi-agent engine generate high-definition art on your CPU.</p>
+            </div>
+
+            <div id="gen-result-container" class="result-container hidden">
+              <div class="image-wrapper">
+                <img id="gen-result-img" src="" alt="Generated artwork">
+                <div id="qa-floating-badge" class="floating-badge">
+                  <span id="qa-badge-score">--</span>
+                  <span id="qa-badge-grade">--</span>
+                </div>
+              </div>
+
+              <!-- Action Bar -->
+              <div class="action-bar">
+                <button type="button" id="btn-download-gen" class="btn-secondary">💾 Download PNG</button>
+                <button type="button" id="btn-send-to-edit" class="btn-secondary">✏️ Open in Image Editor</button>
+                <button type="button" id="btn-copy-gen" class="btn-secondary">📋 Copy Base64</button>
+              </div>
+
+              <!-- Metrics & QA Report Card -->
+              <div class="report-card">
+                <h4>Quality Assurance Report & Diagnostics</h4>
+                <div class="metrics-grid">
+                  <div class="metric-item">
+                    <span class="metric-label">Quality Score</span>
+                    <span id="metric-score" class="metric-value">--</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-label">Sharpness</span>
+                    <span id="metric-sharpness" class="metric-value">--</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-label">Contrast</span>
+                    <span id="metric-contrast" class="metric-value">--</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-label">Latency</span>
+                    <span id="metric-latency" class="metric-value">--</span>
+                  </div>
+                </div>
+                <div class="qa-suggestions" id="qa-suggestions-list"></div>
+                
+                <!-- Audit Trail -->
+                <details class="audit-accordion">
+                  <summary>View Multi-Agent Audit Trail</summary>
+                  <pre id="audit-log-display" class="audit-log-box"></pre>
+                </details>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: IMAGE EDIT & TRANSFORM -->
+      <section id="tab-edit" class="tab-pane">
+        <div class="split-view">
+          <!-- Editor Controls -->
+          <div class="panel control-panel">
+            <div class="panel-section">
+              <label>Source Image</label>
+              <div class="upload-dropzone" id="edit-dropzone">
+                <div class="drop-content">
+                  <span class="drop-icon">📁</span>
+                  <p>Drag & drop image here or <span class="browse-link">browse file</span></p>
+                  <input type="file" id="edit-file-input" accept="image/*" class="hidden-file-input">
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Generative Editing -->
+            <div class="panel-section">
+              <label for="edit-prompt">AI Generative Edit (Optional Prompt)</label>
+              <div class="prompt-box-wrapper">
+                <textarea id="edit-prompt" rows="2" placeholder="e.g. Add golden sunset lighting and falling autumn leaves..."></textarea>
+              </div>
+              <div class="form-group mt-2">
+                <label for="edit-strength">AI Edit Strength: <span id="strength-val">0.65</span></label>
+                <input type="range" id="edit-strength" min="0.1" max="1.0" step="0.05" value="0.65">
+              </div>
+            </div>
+
+            <!-- Instant Preset Filters -->
+            <div class="panel-section">
+              <label>Instant Aesthetic Presets</label>
+              <div class="chips-container" id="filter-chips">
+                <button type="button" class="chip active" data-filter="none">Original</button>
+                <button type="button" class="chip" data-filter="auto_enhance">✨ Auto-Enhance</button>
+                <button type="button" class="chip" data-filter="cinematic">🎬 Cinematic Teal</button>
+                <button type="button" class="chip" data-filter="hdr">🌈 HDR Vivid</button>
+                <button type="button" class="chip" data-filter="portrait_bokeh">🎯 Portrait Bokeh</button>
+                <button type="button" class="chip" data-filter="noir">🕶️ Noir B&W</button>
+                <button type="button" class="chip" data-filter="warm_golden">🌅 Golden Hour</button>
+                <button type="button" class="chip" data-filter="cool_neon">⚡ Neon Cyber</button>
+                <button type="button" class="chip" data-filter="vintage">🎞️ Vintage Film</button>
+                <button type="button" class="chip" data-filter="pencil_sketch">✏️ Pencil Sketch</button>
+                <button type="button" class="chip" data-filter="edge_detect">📐 Edge Detect</button>
+              </div>
+            </div>
+
+            <!-- Fine-Tuning Parametric Sliders -->
+            <div class="panel-section">
+              <label>Fine Adjustments</label>
+              <div class="sliders-grid">
+                <div class="form-group">
+                  <label for="adj-brightness">Brightness: <span id="val-brightness">1.0</span></label>
+                  <input type="range" id="adj-brightness" min="0.5" max="2.0" step="0.05" value="1.0">
+                </div>
+                <div class="form-group">
+                  <label for="adj-contrast">Contrast: <span id="val-contrast">1.0</span></label>
+                  <input type="range" id="adj-contrast" min="0.5" max="2.0" step="0.05" value="1.0">
+                </div>
+                <div class="form-group">
+                  <label for="adj-saturation">Saturation: <span id="val-saturation">1.0</span></label>
+                  <input type="range" id="adj-saturation" min="0.0" max="2.0" step="0.05" value="1.0">
+                </div>
+                <div class="form-group">
+                  <label for="adj-sharpness">Sharpness: <span id="val-sharpness">1.0</span></label>
+                  <input type="range" id="adj-sharpness" min="0.0" max="3.0" step="0.1" value="1.0">
+                </div>
+                <div class="form-group">
+                  <label for="adj-blur">Soft Blur: <span id="val-blur">0.0</span></label>
+                  <input type="range" id="adj-blur" min="0.0" max="15.0" step="0.5" value="0.0">
+                </div>
+                <div class="form-group">
+                  <label for="adj-vignette">Vignette: <span id="val-vignette">0.0</span></label>
+                  <input type="range" id="adj-vignette" min="0.0" max="1.0" step="0.05" value="0.0">
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group-row">
+              <button type="button" id="btn-apply-edit" class="btn-primary-action">
+                <span>⚡ Apply Edits & Style</span>
+              </button>
+              <button type="button" id="btn-reset-edit" class="btn-secondary">
+                <span>🔄 Reset</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Comparison Canvas Panel -->
+          <div class="panel canvas-panel">
+            <div id="edit-empty-state" class="empty-state">
+              <div class="empty-icon">✨</div>
+              <h3>Interactive Split Comparison</h3>
+              <p>Upload or drag an image into the editor, then drag the split slider to compare before and after.</p>
+            </div>
+
+            <div id="edit-canvas-container" class="canvas-container hidden">
+              <div class="comparison-slider-wrapper" id="comparison-slider">
+                <!-- Original Image (Bottom) -->
+                <img id="edit-original-img" src="" alt="Original Image" class="comp-img comp-original">
+                <!-- Edited Image (Top clipped) -->
+                <div class="comp-clip-wrapper" id="comp-clip">
+                  <img id="edit-modified-img" src="" alt="Edited Image" class="comp-img comp-modified">
+                </div>
+                <!-- Draggable Divider Handle -->
+                <div class="comp-divider" id="comp-divider">
+                  <div class="comp-handle">↔</div>
+                </div>
+                <div class="comp-label label-before">Original</div>
+                <div class="comp-label label-after">Edited</div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="action-bar mt-4">
+                <button type="button" id="btn-download-edit" class="btn-secondary">💾 Download Edited PNG</button>
+                <button type="button" id="btn-set-as-source" class="btn-secondary">🔁 Use as New Base</button>
+              </div>
+
+              <!-- QA Card for Edit -->
+              <div class="report-card mt-3">
+                <h4>Edited Image QA Quality Audit</h4>
+                <div class="metrics-grid">
+                  <div class="metric-item">
+                    <span class="metric-label">Quality Score</span>
+                    <span id="edit-metric-score" class="metric-value">--</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-label">Sharpness</span>
+                    <span id="edit-metric-sharpness" class="metric-value">--</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-label">Contrast</span>
+                    <span id="edit-metric-contrast" class="metric-value">--</span>
+                  </div>
+                  <div class="metric-item">
+                    <span class="metric-label">Processing Time</span>
+                    <span id="edit-metric-latency" class="metric-value">--</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: AGENT ORCHESTRATOR -->
+      <section id="tab-agents" class="tab-pane">
+        <div class="orchestrator-layout">
+          <h2>Multi-Agent Orchestration Architecture</h2>
+          <p class="subtitle">Autonomous coordinated agents collaborating on the AMD Ryzen AI 9 HX 370 processor.</p>
+
+          <div class="agents-grid">
+            <!-- Agent 1 -->
+            <div class="agent-card">
+              <div class="agent-card-header">
+                <span class="agent-badge">Agent 1</span>
+                <h3>AI Prompt Engineer</h3>
+              </div>
+              <p>Performs stylistic semantic enhancement, enriches ambient lighting details, camera composition, and constructs negative prompt guardrails.</p>
+              <div class="agent-features">
+                <span>✓ 8 Style Presets</span>
+                <span>✓ Artifact Suppression</span>
+                <span>✓ Semantic Aspect Inferrer</span>
+              </div>
+            </div>
+
+            <!-- Agent 2 -->
+            <div class="agent-card">
+              <div class="agent-card-header">
+                <span class="agent-badge">Agent 2</span>
+                <h3>CPU Inference Engine</h3>
+              </div>
+              <p>Executes multi-threaded Stable Diffusion and Image-to-Image synthesis on CPU with zero discrete GPU usage.</p>
+              <div class="agent-features">
+                <span>✓ Zen 5 Multi-Threading</span>
+                <span>✓ Fast DPM++ Scheduling</span>
+                <span>✓ Async Non-blocking</span>
+              </div>
+            </div>
+
+            <!-- Agent 3 -->
+            <div class="agent-card">
+              <div class="agent-card-header">
+                <span class="agent-badge">Agent 3</span>
+                <h3>Quality Assurance Critic</h3>
+              </div>
+              <p>Audits output tensors: computes Laplacian sharpness variance, RMS contrast, clipping percentages, and delivers 0-100 quality scoring.</p>
+              <div class="agent-features">
+                <span>✓ Sharpness Variance</span>
+                <span>✓ Highlight/Shadow Clipping</span>
+                <span>✓ Actionable Suggestions</span>
+              </div>
+            </div>
+
+            <!-- Agent 4 -->
+            <div class="agent-card">
+              <div class="agent-card-header">
+                <span class="agent-badge">Agent 4</span>
+                <h3>Hardware Guardian</h3>
+              </div>
+              <p>Monitors process boundaries, verifies NVIDIA dGPU remains locked and unallocated, and coordinates thread pool distribution.</p>
+              <div class="agent-features">
+                <span>✓ CUDA Isolation Enforced</span>
+                <span>✓ AVX-512 Profiling</span>
+                <span>✓ Memory Safe Guard</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive Agent Playground -->
+          <div class="panel mt-4">
+            <h3>Interactive Prompt Optimization Playground</h3>
+            <div class="grid-2 mt-2">
+              <div>
+                <label for="agent-test-prompt">Input Raw Prompt</label>
+                <textarea id="agent-test-prompt" rows="3" placeholder="a cat in a garden"></textarea>
+                <button type="button" id="btn-run-agent-test" class="btn-secondary mt-2">Optimize with AI Engineer</button>
+              </div>
+              <div>
+                <label>Optimized Agent Output</label>
+                <pre id="agent-test-output" class="json-preview">Click 'Optimize with AI Engineer' to inspect prompt decomposition...</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: SYSTEM TELEMETRY -->
+      <section id="tab-telemetry" class="tab-pane">
+        <div class="telemetry-layout">
+          <h2>AMD Ryzen AI 9 HX 370 System Telemetry</h2>
+          <p class="subtitle">Real-time hardware status and isolation verification.</p>
+
+          <div class="telemetry-grid" id="telemetry-cards">
+            <div class="telemetry-card">
+              <h4>CPU Processor</h4>
+              <p id="tel-cpu-name" class="tel-value">Detecting...</p>
+              <span id="tel-cpu-threads" class="tel-sub">Logical Threads: --</span>
+            </div>
+            <div class="telemetry-card">
+              <h4>Discrete GPU Isolation</h4>
+              <p id="tel-dgpu-status" class="tel-value text-green">Enforced (Safe)</p>
+              <span class="tel-sub">RTX 4070 Completely Bypassed</span>
+            </div>
+            <div class="telemetry-card">
+              <h4>PyTorch Configuration</h4>
+              <p id="tel-device" class="tel-value">Device: CPU</p>
+              <span id="tel-torch-threads" class="tel-sub">Active Threads: --</span>
+            </div>
+            <div class="telemetry-card">
+              <h4>Hardware Acceleration</h4>
+              <p id="tel-avx" class="tel-value">AVX-512 Active</p>
+              <span class="tel-sub">Zen 5 Vector Instructions</span>
+            </div>
+          </div>
+
+          <div class="panel mt-4">
+            <div class="section-header">
+              <h3>Full Hardware Diagnostics (JSON)</h3>
+              <button type="button" id="btn-refresh-telemetry" class="btn-ghost-small">🔄 Refresh</button>
+            </div>
+            <pre id="raw-hardware-json" class="json-preview">Loading telemetry...</pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>Gemini Nano Banana Image Engine v2.0</span>
+      <span>•</span>
+      <span>AMD Ryzen AI 9 HX 370 CPU Optimized</span>
+      <span>•</span>
+      <span>Port Range: 10000-10100 Enforced</span>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

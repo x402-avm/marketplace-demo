@@ -1,0 +1,111 @@
+/* Studio Canvas and Masking Workspace - Gemini Aesthetic */
+.canvas-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+  user-select: none;
+}
+
+.canvas-pan-container {
+  position: absolute;
+  transform-origin: center center;
+  cursor: crosshair;
+  transition: transform 0.05s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.canvas-pan-container.panning {
+  cursor: grab;
+}
+
+.canvas-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+}
+
+#imageCanvas {
+  z-index: 10;
+}
+
+#maskCanvas {
+  z-index: 20;
+  opacity: 0.65;
+}
+
+/* Floating Toolbar for Canvas */
+.canvas-floating-toolbar {
+  position: absolute;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  background: rgba(30, 31, 32, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-pill);
+  padding: 0.35rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: var(--shadow-md);
+}
+
+.canvas-tool-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+  font-size: 0.82rem;
+}
+
+.canvas-tool-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.canvas-tool-btn.active {
+  color: #fff;
+  background: var(--gemini-purple);
+  box-shadow: 0 0 10px rgba(155, 114, 203, 0.4);
+}
+
+.canvas-tool-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--border-subtle);
+}
+
+/* Custom Brush Cursor Indicator */
+.brush-cursor-indicator {
+  position: fixed;
+  pointer-events: none;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  background: rgba(155, 114, 203, 0.2);
+}

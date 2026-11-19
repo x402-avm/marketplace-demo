@@ -1,0 +1,229 @@
+/* Marketplace shell: graphite on cool white. The four vendors bring their own colour; the shell has none of its own. */
+:root {
+  --mist: #f5f6f7;
+  --sheet: #ffffff;
+  --graphite: #1c2026;
+  --slate: #4e5864;
+  --pencil: #d9dde2;
+  --pencil-strong: #b7bec7;
+  --settled: #1f7a4d;
+  --settled-wash: #e7f3ec;
+  --caution: #8a5300;
+  --caution-wash: #fbf1df;
+  --fault: #b42318;
+  --fault-wash: #fdecea;
+
+  --v-a: #1d55b4;
+  --v-b: #2f7d4f;
+  --v-c: #d9a400;
+  --v-d: #e8892b;
+
+  --font-ui: 'Schibsted Grotesk Variable', system-ui, sans-serif;
+  --font-hash: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.1875rem;
+  --step-2: 1.5rem;
+  --step-3: 2.125rem;
+  --step-4: clamp(2.5rem, 5.5vw, 4.25rem);
+
+  --measure: 64ch;
+  --gutter: clamp(16px, 4vw, 48px);
+  --page: 1240px;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--mist);
+  color: var(--graphite);
+  font-family: var(--font-ui);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  font-feature-settings: 'tnum' 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 650;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+h1 { font-size: var(--step-4); letter-spacing: -0.03em; }
+h2 { font-size: var(--step-2); }
+h3 { font-size: var(--step-1); }
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+img,
+svg,
+video,
+audio {
+  display: block;
+  max-width: 100%;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.hash {
+  font-family: var(--font-hash);
+  font-size: 0.9em;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.muted {
+  color: var(--slate);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.page {
+  width: 100%;
+  max-width: var(--page);
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 56px) var(--gutter) 96px;
+}
+
+/* ---------- controls ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 9px 18px;
+  border: 1px solid var(--graphite);
+  border-radius: 3px;
+  background: var(--graphite);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover:not(:disabled) {
+  background: #2f353e;
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+.btn--quiet {
+  background: transparent;
+  color: var(--graphite);
+}
+.btn--quiet:hover:not(:disabled) {
+  background: rgba(28, 32, 38, 0.06);
+}
+.btn--small {
+  min-height: 34px;
+  padding: 6px 12px;
+  font-size: var(--step--1);
+}
+
+:where(a, button, input, select, textarea, summary):focus-visible {
+  outline: 2px solid var(--graphite);
+  outline-offset: 2px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+.field__label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.field__hint {
+  color: var(--slate);
+  font-size: var(--step--1);
+  font-weight: 400;
+}
+.field__required {
+  color: var(--fault);
+  margin-left: 2px;
+}
+.input {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid var(--pencil-strong);
+  border-radius: 3px;
+  background: var(--sheet);
+  color: var(--graphite);
+  font: inherit;
+}
+textarea.input {
+  min-height: 96px;
+  resize: vertical;
+}
+.input:focus {
+  border-color: var(--graphite);
+}
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+.input-row .input {
+  flex: 1;
+}
+
+/* ---------- notices ---------- */
+.notice {
+  padding: 12px 14px;
+  border-left: 3px solid var(--graphite);
+  background: var(--sheet);
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+.notice--ok { border-color: var(--settled); background: var(--settled-wash); }
+.notice--warn { border-color: var(--caution); background: var(--caution-wash); }
+.notice--error { border-color: var(--fault); background: var(--fault-wash); }
+
+.state {
+  padding: 48px 0;
+  color: var(--slate);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

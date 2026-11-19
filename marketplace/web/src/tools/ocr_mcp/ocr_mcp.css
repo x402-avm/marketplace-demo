@@ -1,0 +1,418 @@
+/* OCR: the document on the left, what it is and what was read on the right. Vendor tokens only. */
+.ocr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.ocr__source,
+.ocr__side {
+  min-width: 0;
+  padding: 24px;
+  background: var(--s-panel);
+  border: 1px solid var(--s-rule);
+  border-radius: var(--s-panel-radius);
+}
+.ocr__source {
+  position: sticky;
+  top: 16px;
+}
+.svc--quarry .ocr__source,
+.svc--quarry .ocr__side {
+  border-width: 2px;
+}
+.ocr__side {
+  display: grid;
+  gap: 24px;
+}
+.ocr .svc__h2.ocr__h {
+  margin-bottom: 0;
+}
+.ocr__pick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 18px;
+}
+.ocr__muted {
+  color: var(--s-muted);
+}
+.ocr__empty {
+  max-width: 48ch;
+}
+.ocr__error {
+  padding: 10px 12px;
+  background: var(--fault-wash);
+  color: var(--fault);
+  border-left: 3px solid var(--fault);
+  overflow-wrap: anywhere;
+}
+
+/* the document itself, on a sheet */
+.ocr__paper {
+  display: grid;
+  gap: 8px;
+}
+.ocr__img {
+  max-height: 560px;
+  margin: 0 auto;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--s-rule);
+}
+.ocr__pdf {
+  width: 100%;
+  height: 560px;
+  border: 1px solid var(--s-rule);
+  background: var(--s-field-bg);
+}
+.ocr__fname {
+  font-size: 0.9375rem;
+  color: var(--s-muted);
+  overflow-wrap: anywhere;
+}
+.ocr__path {
+  margin-top: 18px;
+  font-size: 0.9375rem;
+}
+.ocr__path summary {
+  cursor: pointer;
+  color: var(--s-muted);
+  width: fit-content;
+}
+.ocr__pathrow {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+.ocr__pathrow .input {
+  flex: 1;
+  min-width: 0;
+}
+
+.ocr__btn {
+  min-height: 38px;
+  padding: 6px 14px;
+  border: 1px solid var(--s-field-border);
+  border-radius: var(--s-btn-radius);
+  background: transparent;
+  color: var(--s-ink);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ocr__btn:hover:not(:disabled) {
+  border-color: var(--s-ink);
+}
+.ocr__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* what kind of document */
+.ocr__kinds {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.ocr__kinds legend {
+  padding: 0;
+  margin-bottom: 14px;
+}
+.ocr__kindlist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+.ocr__kind {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 10px;
+  padding: 11px 14px;
+  border: 1px solid var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 12px);
+  cursor: pointer;
+}
+.ocr__kind input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.ocr__kind:hover:not(.is-off) {
+  border-color: var(--s-ink);
+}
+.ocr__kind:has(input:focus-visible) {
+  outline: 2px solid var(--s-accent);
+  outline-offset: 2px;
+}
+.ocr__kind.is-on {
+  background: var(--s-btn-bg);
+  color: var(--s-btn-ink);
+  border-color: var(--s-btn-border, var(--s-btn-bg));
+}
+.ocr__kind.is-off {
+  cursor: not-allowed;
+  border-style: dashed;
+}
+.ocr__kind.is-off .ocr__kindname,
+.ocr__kind.is-off .ocr__kindprice {
+  color: var(--s-muted);
+}
+.ocr__kindname {
+  font-weight: 650;
+}
+.ocr__kindprice {
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  align-self: center;
+}
+.ocr__kinddetail {
+  grid-column: 1 / -1;
+  font-size: 0.875rem;
+  color: var(--s-muted);
+}
+.ocr__kind.is-on .ocr__kinddetail {
+  color: inherit;
+  opacity: 0.9;
+}
+
+.ocr__go {
+  display: grid;
+  gap: 8px;
+}
+
+/* what was read */
+.ocr__reading {
+  padding-top: 20px;
+  border-top: 1px solid var(--s-rule);
+  display: grid;
+  gap: 14px;
+}
+.ocr__reading .rawout {
+  margin-top: 4px;
+}
+.ocr__rowhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 10px;
+}
+.ocr__copies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.ocr__text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+.ocr__textbox {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+  padding: 16px 18px;
+  background: var(--s-field-bg);
+  border: 1px solid var(--s-rule);
+  border-radius: min(var(--s-panel-radius), 10px);
+}
+.ocr__textbox .ocr__text {
+  font-size: 1.15rem;
+  max-width: 60ch;
+}
+.ocr__note {
+  margin-bottom: 8px;
+  font-size: 0.9375rem;
+}
+
+.ocr__page {
+  padding: 14px 0;
+  border-top: 1px solid var(--s-rule);
+}
+.ocr__pageno {
+  font-weight: 650;
+  margin-bottom: 4px;
+}
+
+.ocr__scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--s-rule);
+  border-radius: min(var(--s-panel-radius), 10px);
+  background: var(--s-field-bg);
+}
+.ocr__scroll:focus-visible {
+  outline: 2px solid var(--s-accent);
+}
+.ocr__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.ocr__table th,
+.ocr__table td {
+  padding: 9px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--s-rule);
+  white-space: nowrap;
+}
+.ocr__table thead th {
+  font-weight: 700;
+  border-bottom: 2px solid var(--s-ink);
+}
+.ocr__table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.ocr__table td.is-num {
+  text-align: right;
+}
+
+/* receipt drawn as a narrow till slip */
+.ocr__receipt {
+  max-width: 340px;
+  padding: 20px 22px;
+  background: var(--s-field-bg);
+  border: 1px solid var(--s-rule);
+  border-bottom: 2px dashed var(--s-field-border);
+}
+.ocr__merchant {
+  font-family: var(--s-display);
+  font-size: 1.4rem;
+  font-weight: 650;
+  text-align: center;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+  border-bottom: 1px dashed var(--s-field-border);
+}
+.ocr__lines {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.ocr__lines th {
+  text-align: left;
+  font-weight: 450;
+  padding: 4px 0;
+}
+.ocr__lines td {
+  text-align: right;
+  padding: 4px 0;
+}
+.ocr__lines tfoot th,
+.ocr__lines tfoot td {
+  padding-top: 10px;
+  border-top: 1px solid var(--s-ink);
+  font-weight: 750;
+  font-size: 1.15rem;
+}
+.ocr__rawtext {
+  margin-top: 14px;
+  font-size: 0.9375rem;
+}
+.ocr__rawtext summary {
+  cursor: pointer;
+  color: var(--s-muted);
+}
+.ocr__rawtext .ocr__text {
+  margin-top: 6px;
+}
+
+/* codes */
+.ocr__codes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+.ocr__code {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 12px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--s-field-bg);
+  border: 1px solid var(--s-rule);
+  border-radius: min(var(--s-panel-radius), 10px);
+}
+.ocr__codefmt {
+  grid-column: 1;
+  font-size: 0.875rem;
+  color: var(--s-muted);
+}
+.ocr__codeval {
+  grid-column: 1;
+  font-size: 1.1rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+.ocr__code .ocr__copy {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+/* maths */
+.ocr__math {
+  display: grid;
+  gap: 10px;
+}
+.ocr__mathlabel {
+  font-weight: 650;
+}
+.ocr__latexrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ocr__latex {
+  flex: 1;
+  min-width: 0;
+  padding: 14px 16px;
+  background: var(--s-field-bg);
+  border: 1px solid var(--s-rule);
+  border-radius: min(var(--s-panel-radius), 10px);
+  font-family: var(--font-hash);
+  font-size: 1.25rem;
+  overflow-wrap: anywhere;
+}
+.ocr__latex--inline {
+  font-size: 0.9375rem;
+  padding: 8px 12px;
+}
+.ocr__plainmath {
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 900px) {
+  .ocr {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ocr__source {
+    position: static;
+  }
+  .ocr__pdf {
+    height: 420px;
+  }
+}
+@media (max-width: 520px) {
+  .ocr__source,
+  .ocr__side {
+    padding: 16px;
+  }
+  .ocr__kindlist {
+    grid-template-columns: 1fr;
+  }
+  .ocr__latexrow {
+    flex-wrap: wrap;
+  }
+}

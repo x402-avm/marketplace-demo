@@ -1,0 +1,227 @@
+/* ---------- explorer: the round number is the hero, the chain is drawn as linked tiles ---------- */
+.explorer__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 32px 64px;
+  align-items: end;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--pencil);
+}
+.explorer__round {
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 750;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+}
+.explorer__label {
+  margin-top: 12px;
+  font-size: var(--step-1);
+  color: var(--slate);
+}
+.explorer__verify {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+.explorer__verify p:first-child {
+  color: var(--slate);
+}
+.explorer__h2 {
+  font-size: var(--step-1);
+  margin: 36px 0 18px;
+}
+.chain {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0 0 14px;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+}
+.chain__item {
+  display: flex;
+  align-items: stretch;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+.chain__block {
+  width: 168px;
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  background: var(--sheet);
+  border: 1px solid var(--pencil);
+  border-radius: 3px;
+  text-decoration: none;
+  min-width: 0;
+}
+.chain__block.has-tx {
+  border-color: var(--graphite);
+  box-shadow: inset 0 3px 0 var(--graphite);
+}
+.chain__block:hover {
+  border-color: var(--graphite);
+}
+.chain__round {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.chain__tx {
+  font-size: 0.875rem;
+}
+.chain__hash {
+  font-size: 0.75rem;
+  color: var(--slate);
+}
+.chain__time {
+  font-size: 0.75rem;
+}
+.chain__link {
+  align-self: center;
+  width: 14px;
+  height: 2px;
+  background: var(--settled);
+}
+.chain__link.is-broken {
+  background: repeating-linear-gradient(90deg, var(--fault) 0 3px, transparent 3px 6px);
+}
+
+/* ---------- block detail: a ledger sheet ---------- */
+.ledger__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.ledger__step {
+  display: flex;
+  gap: 20px;
+}
+.ledger__title {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  letter-spacing: -0.04em;
+}
+.ledger__sheet {
+  margin: 28px 0 0;
+  background: var(--sheet);
+  border: 1px solid var(--pencil);
+}
+.ledger__sheet > div {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: 16px;
+  padding: 12px 18px;
+}
+.ledger__sheet > div:nth-child(odd) {
+  background: #f1f4f6;
+}
+.ledger__sheet dt {
+  color: var(--slate);
+}
+.ledger__sheet dd {
+  margin: 0;
+}
+.seal {
+  display: inline-block;
+  padding: 3px 10px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  font-weight: 650;
+  font-size: 0.9375rem;
+}
+.seal--ok { color: var(--settled); }
+.seal--bad { color: var(--fault); }
+.ledger__h2 {
+  margin: 40px 0 14px;
+  font-size: var(--step-1);
+}
+.ledger__scroll {
+  position: relative;
+  overflow-x: auto;
+  background: var(--sheet);
+  border: 1px solid var(--pencil);
+}
+.ledger__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.ledger__table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--slate);
+  padding: 10px 14px;
+  border-bottom: 2px solid var(--graphite);
+}
+.ledger__table td {
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+.ledger__table tbody tr:nth-child(even) {
+  background: #f1f4f6;
+}
+.ledger__table .r {
+  text-align: right;
+}
+
+/* ---------- transaction: a printed receipt ---------- */
+.receipt {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 36px 32px 40px;
+  background: var(--sheet);
+  box-shadow: 0 0 0 1px var(--pencil);
+  -webkit-mask: radial-gradient(circle at 7px 0, transparent 5px, #000 5.5px) 0 0 / 14px 51% repeat-x,
+    radial-gradient(circle at 7px 100%, transparent 5px, #000 5.5px) 0 100% / 14px 51% repeat-x;
+  mask: radial-gradient(circle at 7px 0, transparent 5px, #000 5.5px) 0 0 / 14px 51% repeat-x,
+    radial-gradient(circle at 7px 100%, transparent 5px, #000 5.5px) 0 100% / 14px 51% repeat-x;
+}
+.receipt__title {
+  font-size: var(--step-0);
+  font-weight: 650;
+  color: var(--slate);
+  text-align: center;
+}
+.receipt__amount {
+  margin-top: 10px;
+  text-align: center;
+  font-size: clamp(2.25rem, 7vw, 3.25rem);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+}
+.receipt__purpose {
+  text-align: center;
+  color: var(--slate);
+}
+.receipt__lines {
+  margin: 26px 0 0;
+  border-top: 1px dashed var(--pencil-strong);
+}
+.receipt__lines > div {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--pencil-strong);
+}
+.receipt__lines dt {
+  color: var(--slate);
+}
+.receipt__lines dd {
+  margin: 0;
+  display: grid;
+  gap: 2px;
+}
+
+@media (max-width: 900px) {
+  .explorer__head {
+    grid-template-columns: 1fr;
+  }
+  .ledger__sheet > div,
+  .receipt__lines > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
