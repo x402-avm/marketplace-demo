@@ -1,0 +1,5 @@
+py-algorand-sdk
+ai-economy-sdk==0.4.0
+x402-algorand==0.2.0
+pytest
+pytest-asyncio

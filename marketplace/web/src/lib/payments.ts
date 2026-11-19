@@ -1,0 +1,45 @@
+import type algosdk from 'algosdk'
+import {
+  payForRequirement as realPayForRequirement,
+  buildIdentityTxn as realBuildIdentityTxn,
+  encodeIdentityHeader as realEncodeIdentityHeader,
+} from 'x402-avm-js'
+
+export async function payForRequirement(
+  paymentRequired: any,
+  payerAddress: string,
+  algod: algosdk.Algodv2,
+  signTxns: (txns: Uint8Array[], indexes: number[]) => Promise<(Uint8Array | null)[]>
+): Promise<string> {
+  const safeSignTxns = async (
+    txns: Uint8Array[],
+    indexes: number[]
+  ): Promise<(Uint8Array | null)[]> => {
+    const signed = await signTxns(txns, indexes)
+    if (!signed) return new Array(txns.length).fill(null)
+    const mapped: (Uint8Array | null)[] = new Array(txns.length).fill(null)
+    if (signed.length === indexes.length) {
+      indexes.forEach((idx, k) => {
+        mapped[idx] = signed[k]
+      })
+    } else {
+      signed.forEach((s, k) => {
+        if (s) mapped[k] = s
+      })
+    }
+    return mapped
+  }
+  return realPayForRequirement(paymentRequired, payerAddress, algod, safeSignTxns)
+}
+
+export function buildIdentityTxn(
+  address: string,
+  genesisHashB64: string,
+  ts?: number
+): algosdk.Transaction {
+  return realBuildIdentityTxn(address, genesisHashB64, ts)
+}
+
+export function encodeIdentityHeader(signedBytes: Uint8Array): string {
+  return realEncodeIdentityHeader(signedBytes)
+}
