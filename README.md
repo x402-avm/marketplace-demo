@@ -59,7 +59,7 @@ Each tool supports dual-currency payment in native ALGO microAlgos or mUSD (Micr
 ## Requirements
 
 - Python 3.10+ (Python 3.12 recommended)
-- Node.js 18+ and npm
+- Node.js 22.12+ (or newer) and npm (for the web application)
 - Docker and [AlgoKit CLI](https://github.com/algorandfoundation/algokit-cli) (for LocalNet)
 - `curl`
 
