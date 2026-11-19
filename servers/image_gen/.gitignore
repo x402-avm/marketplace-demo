@@ -1,0 +1,30 @@
+# Virtual environments
+venv/
+.venv/
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Outputs & Generated Media
+outputs/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.safetensors
+*.bin
+
+# Chat session storage / local db
+data/*.db
+data/*.db-journal
+data/*.db-wal
+data/*.db-shm
+
+# Node modules & temporary files
+node_modules/
+*.log
+.DS_Store
+.agents/
+

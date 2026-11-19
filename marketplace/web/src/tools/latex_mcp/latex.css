@@ -1,0 +1,267 @@
+/* LaTeX desk: source on the left with a line-number gutter, the typeset PDF on the right. Vendor tokens only. */
+.latex_mcp {
+  --latex-line: 21px;
+  min-width: 0;
+}
+.latex_mcp :where(button, a, textarea):focus-visible {
+  outline: 2px solid var(--s-ink);
+  outline-offset: 2px;
+}
+.latex_mcp__desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+.latex_mcp__source,
+.latex_mcp__page {
+  min-width: 0;
+}
+.latex_mcp__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-bottom: 12px;
+}
+.latex_mcp__h {
+  font-family: var(--s-display);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+.latex_mcp__page > .latex_mcp__h {
+  margin-bottom: 12px;
+}
+.latex_mcp__starters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.latex_mcp__starthint {
+  color: var(--s-muted);
+  font-size: 0.9375rem;
+  margin-right: 4px;
+}
+.latex_mcp__starter {
+  min-height: 34px;
+  padding: 5px 12px;
+  border: 1px solid var(--s-field-border);
+  border-radius: var(--s-btn-radius);
+  background: transparent;
+  color: var(--s-ink);
+  font: inherit;
+  font-size: 0.9375rem;
+  cursor: pointer;
+}
+.latex_mcp__starter:hover:not(:disabled) {
+  border-color: var(--s-ink);
+}
+.latex_mcp__starter[aria-pressed='true'] {
+  background: var(--s-ink);
+  border-color: var(--s-ink);
+  color: var(--s-bg);
+}
+.latex_mcp__starter:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* the editor: a gutter and a textarea that scroll together */
+.latex_mcp__editor {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  height: 30rem;
+  border: 1px solid var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 10px);
+  background: var(--s-field-bg);
+  overflow: hidden;
+}
+.latex_mcp__editor:focus-within {
+  border-color: var(--s-ink);
+}
+.latex_mcp__gutter {
+  overflow: hidden;
+  padding: 12px 0;
+  min-width: 3.25em;
+  border-right: 1px solid var(--s-rule);
+  color: var(--s-muted);
+  font-family: var(--font-hash);
+  font-size: 0.8125rem;
+  line-height: var(--latex-line);
+  text-align: right;
+  user-select: none;
+}
+.latex_mcp__ln {
+  height: var(--latex-line);
+  padding: 0 10px 0 8px;
+  font-variant-numeric: tabular-nums;
+}
+.latex_mcp__ln.is-focus {
+  color: var(--s-ink);
+  font-weight: 700;
+}
+.latex_mcp__ln.is-bad {
+  background: var(--s-ink);
+  color: var(--s-bg);
+  font-weight: 700;
+}
+.latex_mcp__area {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 12px 14px;
+  border: 0;
+  border-radius: 0;
+  resize: none;
+  background: transparent;
+  color: var(--s-ink);
+  font-family: var(--font-hash);
+  font-size: 0.875rem;
+  line-height: var(--latex-line);
+  white-space: pre;
+  overflow: auto;
+  tab-size: 2;
+}
+.latex_mcp__area:focus,
+.latex_mcp__area:focus-visible {
+  outline: none;
+}
+.latex_mcp__area::selection {
+  background: var(--s-ink);
+  color: var(--s-bg);
+}
+.latex_mcp__meta {
+  margin-top: 6px;
+  color: var(--s-muted);
+  font-size: 0.8125rem;
+}
+.latex_mcp__go {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+.latex_mcp__note {
+  color: var(--s-muted);
+  font-size: 0.875rem;
+}
+
+/* the output pane */
+.latex_mcp__blank {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1.294;
+  max-height: 34rem;
+  padding: 24px;
+  border: 1px dashed var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 10px);
+  color: var(--s-muted);
+  text-align: center;
+}
+.latex_mcp__blank p {
+  max-width: 24ch;
+}
+.latex_mcp__pdf {
+  display: block;
+  width: 100%;
+  height: 38rem;
+  border: 1px solid var(--s-rule);
+  border-radius: min(var(--s-panel-radius), 10px);
+  background: var(--s-field-bg);
+}
+.latex_mcp__fallback {
+  padding: 18px;
+}
+.latex_mcp__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 10px;
+  font-weight: 600;
+}
+.latex_mcp__links a {
+  text-underline-offset: 3px;
+}
+
+.latex_mcp__problems {
+  padding: 16px 18px;
+  border: 2px solid var(--s-ink);
+  border-radius: min(var(--s-panel-radius), 10px);
+}
+.latex_mcp__h3 {
+  font-family: var(--s-display);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.latex_mcp__plist {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.latex_mcp__pjump {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 8px);
+  background: var(--s-field-bg);
+  color: var(--s-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.latex_mcp__pjump:hover {
+  border-color: var(--s-ink);
+}
+.latex_mcp__pline {
+  font-family: var(--font-hash);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.latex_mcp__pnoline {
+  display: block;
+  padding: 6px 0;
+}
+
+/* vendor-specific tuning */
+.svc--nova .latex_mcp__h,
+.svc--nova .latex_mcp__h3 {
+  font-style: italic;
+  font-weight: 400;
+}
+.svc--quarry .latex_mcp__h {
+  font-variation-settings: 'wdth' 72;
+  font-weight: 850;
+}
+.svc--quarry .latex_mcp__editor,
+.svc--quarry .latex_mcp__pdf {
+  border-width: 2px;
+}
+.svc--lumen .latex_mcp__h {
+  font-weight: 400;
+}
+
+@media (max-width: 900px) {
+  .latex_mcp__desk {
+    grid-template-columns: 1fr;
+  }
+  .latex_mcp__editor {
+    height: 22rem;
+  }
+  .latex_mcp__pdf {
+    height: 30rem;
+  }
+  .latex_mcp__blank {
+    aspect-ratio: auto;
+    min-height: 10rem;
+  }
+}

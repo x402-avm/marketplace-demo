@@ -1,0 +1,989 @@
+{
+  "network": "algorand:qNF74lmmiHUCf7s3oewhYsMzOCOEptuJ9ytCk5gBPGI=",
+  "assets": {
+    "ALGO": 0,
+    "mUSD": 3456,
+    "AI-SUB": 1010
+  },
+  "treasury": "SPDMDX4SBNY35L2GZB7RBKTPRT76NUVWA2GNXEQDTPPNKUOYJIK5ERFAW4",
+  "subscription": {
+    "asset": "AI-SUB",
+    "price": 5000000,
+    "price_asset": "ALGO",
+    "days": 30
+  },
+  "vendors": {
+    "vendorA": {
+      "name": "Nova Labs",
+      "address": "A4ZN6Y7WO2SJ2NA33IERUZWC476MCMTX6JA5CM2XC27ZS2OIB43F24TCWE"
+    },
+    "vendorB": {
+      "name": "Blue Fern AI",
+      "address": "DCOWE3GVBN4CZZCAQCWZFT32NMMCRI7Z75INX7NBWSS2ARO5QYVH7VJJDI"
+    },
+    "vendorC": {
+      "name": "Quarry Compute",
+      "address": "A2JRGNJ7ZGLU63EGNMKNG5TXQAVN232SP6SOFMHADF3VUUBNTD6FJ4Q2WA"
+    },
+    "vendorD": {
+      "name": "Lumen Works",
+      "address": "JP2QTD7KUY3KVP57ALY3CQN3I3MOVB2HSTGHSXON2PDZ2FNUO5SL4W4TJ4"
+    }
+  },
+  "listings": [
+    {
+      "id": "tts-1",
+      "domain": "tts",
+      "proxy_index": 1,
+      "port": 8051,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "synthesize_speech": 20000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "tts-2",
+      "domain": "tts",
+      "proxy_index": 2,
+      "port": 8052,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "synthesize_speech": 16000
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "tts-3",
+      "domain": "tts",
+      "proxy_index": 3,
+      "port": 8053,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "synthesize_speech": 25000
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "tts-4",
+      "domain": "tts",
+      "proxy_index": 4,
+      "port": 8054,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "synthesize_speech": 30000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "image_gen-1",
+      "domain": "image_gen",
+      "proxy_index": 1,
+      "port": 10002,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "generate_image": 20000,
+        "edit_image": 20000,
+        "optimize_prompt": 4000,
+        "analyze_image_quality": 6000,
+        "get_hardware_status": 3000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "image_gen-2",
+      "domain": "image_gen",
+      "proxy_index": 2,
+      "port": 10003,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "generate_image": 16000,
+        "edit_image": 16000,
+        "optimize_prompt": 3200,
+        "analyze_image_quality": 4800,
+        "get_hardware_status": 3000
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "image_gen-3",
+      "domain": "image_gen",
+      "proxy_index": 3,
+      "port": 10004,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "generate_image": 25000,
+        "edit_image": 25000,
+        "optimize_prompt": 5000,
+        "analyze_image_quality": 7500,
+        "get_hardware_status": 3750
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "web_mcp-1",
+      "domain": "web_mcp",
+      "proxy_index": 1,
+      "port": 8060,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "web_open_page": 4000,
+        "web_screen_shoot": 6000,
+        "web_page_info": 4000,
+        "web_click_button": 4000,
+        "send_api_request": 4000,
+        "ddg_search": 3000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "web_mcp-2",
+      "domain": "web_mcp",
+      "proxy_index": 2,
+      "port": 8061,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "web_open_page": 3200,
+        "web_screen_shoot": 4800,
+        "web_page_info": 3200,
+        "web_click_button": 3200,
+        "send_api_request": 3200,
+        "ddg_search": 3000
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "web_mcp-3",
+      "domain": "web_mcp",
+      "proxy_index": 3,
+      "port": 8062,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "web_open_page": 5000,
+        "web_screen_shoot": 7500,
+        "web_page_info": 5000,
+        "web_click_button": 5000,
+        "send_api_request": 5000,
+        "ddg_search": 3750
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "web_mcp-4",
+      "domain": "web_mcp",
+      "proxy_index": 4,
+      "port": 8063,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "web_open_page": 6000,
+        "web_screen_shoot": 9000,
+        "web_page_info": 6000,
+        "web_click_button": 6000,
+        "send_api_request": 6000,
+        "ddg_search": 4500
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "invoice_mcp-1",
+      "domain": "invoice_mcp",
+      "proxy_index": 1,
+      "port": 8065,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "generate_invoice": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "invoice_mcp-2",
+      "domain": "invoice_mcp",
+      "proxy_index": 2,
+      "port": 8066,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "generate_invoice": 4800
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "invoice_mcp-3",
+      "domain": "invoice_mcp",
+      "proxy_index": 3,
+      "port": 8067,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "generate_invoice": 7500
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "invoice_mcp-4",
+      "domain": "invoice_mcp",
+      "proxy_index": 4,
+      "port": 8068,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "generate_invoice": 9000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "invoice_mcp-5",
+      "domain": "invoice_mcp",
+      "proxy_index": 5,
+      "port": 8069,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "generate_invoice": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "domain_mcp-1",
+      "domain": "domain_mcp",
+      "proxy_index": 1,
+      "port": 8071,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "domain_whois": 3000,
+        "domain_dns": 3000,
+        "domain_ssl": 3000,
+        "domain_ip": 3000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "domain_mcp-2",
+      "domain": "domain_mcp",
+      "proxy_index": 2,
+      "port": 8072,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "domain_whois": 3000,
+        "domain_dns": 3000,
+        "domain_ssl": 3000,
+        "domain_ip": 3000
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "domain_mcp-3",
+      "domain": "domain_mcp",
+      "proxy_index": 3,
+      "port": 8073,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "domain_whois": 3750,
+        "domain_dns": 3750,
+        "domain_ssl": 3750,
+        "domain_ip": 3750
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "domain_mcp-4",
+      "domain": "domain_mcp",
+      "proxy_index": 4,
+      "port": 8074,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "domain_whois": 4500,
+        "domain_dns": 4500,
+        "domain_ssl": 4500,
+        "domain_ip": 4500
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "yt_mcp-1",
+      "domain": "yt_mcp",
+      "proxy_index": 1,
+      "port": 8076,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "download_yt_video": 20000,
+        "get_yt_transcript": 4000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "yt_mcp-2",
+      "domain": "yt_mcp",
+      "proxy_index": 2,
+      "port": 8077,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "download_yt_video": 16000,
+        "get_yt_transcript": 3200
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "yt_mcp-3",
+      "domain": "yt_mcp",
+      "proxy_index": 3,
+      "port": 8078,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "download_yt_video": 25000,
+        "get_yt_transcript": 5000
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "yt_mcp-4",
+      "domain": "yt_mcp",
+      "proxy_index": 4,
+      "port": 8079,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "download_yt_video": 30000,
+        "get_yt_transcript": 6000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "sandbox_mcp-1",
+      "domain": "sandbox_mcp",
+      "proxy_index": 1,
+      "port": 8082,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "run_sandbox_code": 5000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "sandbox_mcp-2",
+      "domain": "sandbox_mcp",
+      "proxy_index": 2,
+      "port": 8083,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "run_sandbox_code": 4000
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "sandbox_mcp-3",
+      "domain": "sandbox_mcp",
+      "proxy_index": 3,
+      "port": 8084,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "run_sandbox_code": 6250
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "sandbox_mcp-4",
+      "domain": "sandbox_mcp",
+      "proxy_index": 4,
+      "port": 8085,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "run_sandbox_code": 7500
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "sandbox_mcp-5",
+      "domain": "sandbox_mcp",
+      "proxy_index": 5,
+      "port": 8086,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "run_sandbox_code": 5000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "latex_mcp-1",
+      "domain": "latex_mcp",
+      "proxy_index": 1,
+      "port": 8088,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "compile_latex_to_pdf": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "latex_mcp-2",
+      "domain": "latex_mcp",
+      "proxy_index": 2,
+      "port": 8089,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "compile_latex_to_pdf": 4800
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "latex_mcp-3",
+      "domain": "latex_mcp",
+      "proxy_index": 3,
+      "port": 8090,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "compile_latex_to_pdf": 7500
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "conversion_mcp-1",
+      "domain": "conversion_mcp",
+      "proxy_index": 1,
+      "port": 8092,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "document_convert": 6000,
+        "data_convert": 6000,
+        "image_convert": 6000,
+        "audio_convert": 6000,
+        "video_convert": 6000,
+        "archive_create": 6000,
+        "archive_extract": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "conversion_mcp-2",
+      "domain": "conversion_mcp",
+      "proxy_index": 2,
+      "port": 8093,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "document_convert": 4800,
+        "data_convert": 4800,
+        "image_convert": 4800,
+        "audio_convert": 4800,
+        "video_convert": 4800,
+        "archive_create": 4800,
+        "archive_extract": 4800
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "conversion_mcp-3",
+      "domain": "conversion_mcp",
+      "proxy_index": 3,
+      "port": 8094,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "document_convert": 7500,
+        "data_convert": 7500,
+        "image_convert": 7500,
+        "audio_convert": 7500,
+        "video_convert": 7500,
+        "archive_create": 7500,
+        "archive_extract": 7500
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "conversion_mcp-4",
+      "domain": "conversion_mcp",
+      "proxy_index": 4,
+      "port": 8095,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "document_convert": 9000,
+        "data_convert": 9000,
+        "image_convert": 9000,
+        "audio_convert": 9000,
+        "video_convert": 9000,
+        "archive_create": 9000,
+        "archive_extract": 9000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "ocr_mcp-1",
+      "domain": "ocr_mcp",
+      "proxy_index": 1,
+      "port": 8097,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "image_to_text": 6000,
+        "pdf_to_text": 6000,
+        "handwriting_ocr": 6000,
+        "table_extraction": 6000,
+        "math_ocr": 6000,
+        "receipt_ocr": 6000,
+        "barcode_reader": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "ocr_mcp-2",
+      "domain": "ocr_mcp",
+      "proxy_index": 2,
+      "port": 8098,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "image_to_text": 4800,
+        "pdf_to_text": 4800,
+        "handwriting_ocr": 4800,
+        "table_extraction": 4800,
+        "math_ocr": 4800,
+        "receipt_ocr": 4800,
+        "barcode_reader": 4800
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "resume_mcp-1",
+      "domain": "resume_mcp",
+      "proxy_index": 1,
+      "port": 8100,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "resume_score": 4000,
+        "ats_check": 4000,
+        "improve_resume": 4000,
+        "resume_to_pdf": 6000,
+        "cover_letter": 4000,
+        "portfolio_generator": 4000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "resume_mcp-2",
+      "domain": "resume_mcp",
+      "proxy_index": 2,
+      "port": 8101,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "resume_score": 3200,
+        "ats_check": 3200,
+        "improve_resume": 3200,
+        "resume_to_pdf": 4800,
+        "cover_letter": 3200,
+        "portfolio_generator": 3200
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "resume_mcp-3",
+      "domain": "resume_mcp",
+      "proxy_index": 3,
+      "port": 8102,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "resume_score": 5000,
+        "ats_check": 5000,
+        "improve_resume": 5000,
+        "resume_to_pdf": 7500,
+        "cover_letter": 5000,
+        "portfolio_generator": 5000
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "resume_mcp-4",
+      "domain": "resume_mcp",
+      "proxy_index": 4,
+      "port": 8103,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "resume_score": 6000,
+        "ats_check": 6000,
+        "improve_resume": 6000,
+        "resume_to_pdf": 9000,
+        "cover_letter": 6000,
+        "portfolio_generator": 6000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "resume_mcp-5",
+      "domain": "resume_mcp",
+      "proxy_index": 5,
+      "port": 8104,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "resume_score": 4000,
+        "ats_check": 4000,
+        "improve_resume": 4000,
+        "resume_to_pdf": 6000,
+        "cover_letter": 4000,
+        "portfolio_generator": 4000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "pdf_mcp-1",
+      "domain": "pdf_mcp",
+      "proxy_index": 1,
+      "port": 8106,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "pdf_read_all": 6000,
+        "pdf_search": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "pdf_mcp-2",
+      "domain": "pdf_mcp",
+      "proxy_index": 2,
+      "port": 8107,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "pdf_read_all": 4800,
+        "pdf_search": 4800
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "pdf_mcp-3",
+      "domain": "pdf_mcp",
+      "proxy_index": 3,
+      "port": 8108,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "pdf_read_all": 7500,
+        "pdf_search": 7500
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "pdf_mcp-4",
+      "domain": "pdf_mcp",
+      "proxy_index": 4,
+      "port": 8109,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "pdf_read_all": 9000,
+        "pdf_search": 9000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "pdf_mcp-5",
+      "domain": "pdf_mcp",
+      "proxy_index": 5,
+      "port": 8110,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "pdf_read_all": 6000,
+        "pdf_search": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "pdf_reader_mcp-1",
+      "domain": "pdf_reader_mcp",
+      "proxy_index": 1,
+      "port": 8112,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "read_pdf": 6000,
+        "search_pdf": 6000,
+        "pdf_evidence": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "pdf_reader_mcp-2",
+      "domain": "pdf_reader_mcp",
+      "proxy_index": 2,
+      "port": 8113,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "read_pdf": 4800,
+        "search_pdf": 4800,
+        "pdf_evidence": 4800
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "image_edit_mcp-1",
+      "domain": "image_edit_mcp",
+      "proxy_index": 1,
+      "port": 8115,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "compress_image": 6000,
+        "resize_image": 6000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "image_edit_mcp-2",
+      "domain": "image_edit_mcp",
+      "proxy_index": 2,
+      "port": 8116,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "compress_image": 4800,
+        "resize_image": 4800
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "image_edit_mcp-3",
+      "domain": "image_edit_mcp",
+      "proxy_index": 3,
+      "port": 8117,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "compress_image": 7500,
+        "resize_image": 7500
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "image_edit_mcp-4",
+      "domain": "image_edit_mcp",
+      "proxy_index": 4,
+      "port": 8118,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "compress_image": 9000,
+        "resize_image": 9000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "video_edit_mcp-1",
+      "domain": "video_edit_mcp",
+      "proxy_index": 1,
+      "port": 8120,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "trim_video": 20000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "video_edit_mcp-2",
+      "domain": "video_edit_mcp",
+      "proxy_index": 2,
+      "port": 8121,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "trim_video": 16000
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "video_edit_mcp-3",
+      "domain": "video_edit_mcp",
+      "proxy_index": 3,
+      "port": 8122,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "trim_video": 25000
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "video_edit_mcp-4",
+      "domain": "video_edit_mcp",
+      "proxy_index": 4,
+      "port": 8123,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "trim_video": 30000
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "video_edit_mcp-5",
+      "domain": "video_edit_mcp",
+      "proxy_index": 5,
+      "port": 8124,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "trim_video": 20000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "paper_mcp-1",
+      "domain": "paper_mcp",
+      "proxy_index": 1,
+      "port": 8126,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "search_papers": 3000
+      },
+      "default_price": 3000
+    },
+    {
+      "id": "paper_mcp-2",
+      "domain": "paper_mcp",
+      "proxy_index": 2,
+      "port": 8127,
+      "vendor": "vendorB",
+      "asset": "mUSD",
+      "multiplier": 0.8,
+      "prices": {
+        "search_papers": 3000
+      },
+      "default_price": 2400
+    },
+    {
+      "id": "paper_mcp-3",
+      "domain": "paper_mcp",
+      "proxy_index": 3,
+      "port": 8128,
+      "vendor": "vendorC",
+      "asset": "ALGO",
+      "multiplier": 1.25,
+      "prices": {
+        "search_papers": 3750
+      },
+      "default_price": 3750
+    },
+    {
+      "id": "paper_mcp-4",
+      "domain": "paper_mcp",
+      "proxy_index": 4,
+      "port": 8129,
+      "vendor": "vendorD",
+      "asset": "ALGO",
+      "multiplier": 1.5,
+      "prices": {
+        "search_papers": 4500
+      },
+      "default_price": 4500
+    },
+    {
+      "id": "paper_mcp-5",
+      "domain": "paper_mcp",
+      "proxy_index": 5,
+      "port": 8130,
+      "vendor": "vendorA",
+      "asset": "ALGO",
+      "multiplier": 1.0,
+      "prices": {
+        "search_papers": 3000
+      },
+      "default_price": 3000
+    }
+  ]
+}

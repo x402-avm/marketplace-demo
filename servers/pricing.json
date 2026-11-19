@@ -1,0 +1,87 @@
+{
+  "default": 3000,
+  "domains": {
+    "tts": {
+      "synthesize_speech": 20000
+    },
+    "web_mcp": {
+      "web_open_page": 4000,
+      "web_screen_shoot": 6000,
+      "web_page_info": 4000,
+      "web_click_button": 4000,
+      "send_api_request": 4000,
+      "ddg_search": 3000
+    },
+    "invoice_mcp": {
+      "generate_invoice": 6000
+    },
+    "domain_mcp": {
+      "domain_whois": 3000,
+      "domain_dns": 3000,
+      "domain_ssl": 3000,
+      "domain_ip": 3000
+    },
+    "yt_mcp": {
+      "download_yt_video": 20000,
+      "get_yt_transcript": 4000
+    },
+    "sandbox_mcp": {
+      "run_sandbox_code": 5000
+    },
+    "latex_mcp": {
+      "compile_latex_to_pdf": 6000
+    },
+    "conversion_mcp": {
+      "document_convert": 6000,
+      "data_convert": 6000,
+      "image_convert": 6000,
+      "audio_convert": 6000,
+      "video_convert": 6000,
+      "archive_create": 6000,
+      "archive_extract": 6000
+    },
+    "ocr_mcp": {
+      "image_to_text": 6000,
+      "pdf_to_text": 6000,
+      "handwriting_ocr": 6000,
+      "table_extraction": 6000,
+      "math_ocr": 6000,
+      "receipt_ocr": 6000,
+      "barcode_reader": 6000
+    },
+    "resume_mcp": {
+      "resume_score": 4000,
+      "ats_check": 4000,
+      "improve_resume": 4000,
+      "resume_to_pdf": 6000,
+      "cover_letter": 4000,
+      "portfolio_generator": 4000
+    },
+    "pdf_mcp": {
+      "pdf_read_all": 6000,
+      "pdf_search": 6000
+    },
+    "pdf_reader_mcp": {
+      "read_pdf": 6000,
+      "search_pdf": 6000,
+      "pdf_evidence": 6000
+    },
+    "image_edit_mcp": {
+      "compress_image": 6000,
+      "resize_image": 6000
+    },
+    "video_edit_mcp": {
+      "trim_video": 20000
+    },
+    "paper_mcp": {
+      "search_papers": 3000
+    },
+    "image_gen": {
+      "generate_image": 20000,
+      "edit_image": 20000,
+      "optimize_prompt": 4000,
+      "analyze_image_quality": 6000,
+      "get_hardware_status": 3000
+    }
+  }
+}

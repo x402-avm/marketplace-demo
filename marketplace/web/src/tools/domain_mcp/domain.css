@@ -1,0 +1,421 @@
+/* Domain lookup: one domain, four paid lookups as folder tabs over a report. Vendor tokens only. */
+.domain_mcp {
+  display: grid;
+  gap: 26px;
+}
+
+/* ---- the domain ---- */
+.domain_mcp__entry {
+  max-width: 720px;
+}
+.domain_mcp__label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.9375rem;
+  color: var(--s-muted);
+}
+.domain_mcp__input {
+  width: 100%;
+  min-height: 60px;
+  padding: 8px 16px;
+  background: var(--s-field-bg);
+  border: 1px solid var(--s-field-border);
+  border-radius: min(var(--s-panel-radius), 12px);
+  color: var(--s-ink);
+  font-family: var(--font-hash);
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  letter-spacing: -0.01em;
+}
+.domain_mcp__input::placeholder {
+  color: var(--s-muted);
+  opacity: 1;
+}
+.domain_mcp__input:focus {
+  outline: 2px solid var(--s-accent);
+  outline-offset: 1px;
+  border-color: var(--s-ink);
+}
+.domain_mcp__hint {
+  margin-top: 6px;
+  font-size: 0.9375rem;
+  color: var(--s-muted);
+}
+
+/* ---- tabs ---- */
+.domain_mcp__report {
+  min-width: 0;
+}
+.domain_mcp__tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+.domain_mcp__tab {
+  display: grid;
+  gap: 2px;
+  justify-items: start;
+  padding: 12px 16px 12px;
+  margin-bottom: -1px;
+  background: transparent;
+  border: 1px solid var(--s-rule);
+  border-bottom-color: transparent;
+  border-radius: min(var(--s-panel-radius), 12px) min(var(--s-panel-radius), 12px) 0 0;
+  color: var(--s-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.domain_mcp__tab:hover {
+  background: var(--s-panel);
+}
+.domain_mcp__tab[aria-selected='true'] {
+  background: var(--s-panel);
+  border-color: var(--s-rule);
+  border-bottom-color: var(--s-panel);
+  box-shadow: inset 0 3px 0 var(--s-accent);
+}
+.domain_mcp__tab:focus-visible {
+  outline: 2px solid var(--s-accent);
+  outline-offset: 2px;
+}
+.domain_mcp__tabname {
+  font-family: var(--s-display);
+  font-size: 1.15rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+.domain_mcp__tabprice {
+  font-size: 0.875rem;
+  color: var(--s-muted);
+}
+.domain_mcp__tabstate {
+  margin-left: 8px;
+  padding: 0 6px;
+  border: 1px solid var(--s-rule);
+  border-radius: 999px;
+  color: var(--s-ink);
+}
+.domain_mcp__panel {
+  padding: 24px 26px 28px;
+  background: var(--s-panel);
+  border: 1px solid var(--s-rule);
+  border-radius: 0 0 var(--s-panel-radius) var(--s-panel-radius);
+}
+.domain_mcp__ask {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--s-rule);
+}
+.domain_mcp__what {
+  flex: 1 1 320px;
+  max-width: 60ch;
+}
+.domain_mcp__answer {
+  padding-top: 22px;
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+.domain_mcp__note {
+  color: var(--s-muted);
+  max-width: 68ch;
+}
+.domain_mcp__problem {
+  padding: 12px 14px;
+  border-left: 3px solid var(--caution);
+  background: var(--caution-wash);
+  color: #5c3700;
+  max-width: 68ch;
+}
+.domain_mcp__plain {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--font-hash);
+  font-size: 0.875rem;
+}
+.domain_mcp__aside {
+  color: var(--s-muted);
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+.domain_mcp__headline {
+  font-family: var(--s-display);
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+/* ---- facts ---- */
+.domain_mcp__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px 28px;
+  margin: 0;
+}
+.domain_mcp__fact {
+  padding-top: 8px;
+  border-top: 1px solid var(--s-rule);
+  min-width: 0;
+}
+.domain_mcp__fact dt {
+  font-size: 0.875rem;
+  color: var(--s-muted);
+}
+.domain_mcp__fact dd {
+  margin: 2px 0 0;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+.domain_mcp__fact a {
+  text-underline-offset: 3px;
+}
+.domain_mcp__whois {
+  display: grid;
+  gap: 22px;
+}
+.domain_mcp__group h4 {
+  font-size: 0.9375rem;
+  font-weight: 650;
+  margin-bottom: 8px;
+}
+.domain_mcp__mono-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 2 240px;
+  column-gap: 28px;
+  font-family: var(--font-hash);
+  font-size: 0.9rem;
+}
+.domain_mcp__mono-list li {
+  padding: 3px 0;
+  overflow-wrap: anywhere;
+}
+.domain_mcp__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.domain_mcp__tags li {
+  padding: 4px 12px;
+  border: 1px solid var(--s-field-border);
+  border-radius: var(--s-btn-radius);
+  font-size: 0.9375rem;
+}
+
+/* ---- DNS table ---- */
+.domain_mcp__tablewrap {
+  overflow-x: auto;
+}
+.domain_mcp__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.domain_mcp__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.domain_mcp__table thead th {
+  text-align: left;
+  font-weight: 450;
+  color: var(--s-muted);
+  padding: 0 12px 8px 0;
+  border-bottom: 2px solid var(--s-ink);
+}
+.domain_mcp__rtype {
+  border-bottom: 1px solid var(--s-rule);
+}
+.domain_mcp__rtype th {
+  width: 11rem;
+  padding: 10px 16px 10px 0;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 400;
+}
+.domain_mcp__rtype td {
+  padding: 5px 0;
+  font-family: var(--font-hash);
+  font-size: 0.875rem;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.domain_mcp__rtype tr:first-child td {
+  padding-top: 10px;
+}
+.domain_mcp__rtype tr:last-child td {
+  padding-bottom: 10px;
+}
+.domain_mcp__rtype td .domain_mcp__aside {
+  font-family: var(--s-body);
+}
+.domain_mcp__type {
+  display: block;
+  font-family: var(--font-hash);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.domain_mcp__typename {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--s-muted);
+}
+
+/* ---- certificate ---- */
+.domain_mcp__cert {
+  display: grid;
+  gap: 14px;
+}
+.domain_mcp__certline {
+  max-width: 64ch;
+}
+.domain_mcp__timeline {
+  max-width: 720px;
+}
+.domain_mcp__track {
+  position: relative;
+  height: 18px;
+  border: 1px solid var(--s-ink);
+  border-radius: min(var(--s-panel-radius), 9px);
+  background: var(--s-field-bg);
+  overflow: hidden;
+}
+.domain_mcp__left,
+.domain_mcp__used {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: var(--s-accent);
+}
+.domain_mcp__used {
+  background: var(--s-muted);
+}
+.domain_mcp__now {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--s-ink);
+}
+.domain_mcp__tick {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--s-ink);
+  opacity: 0.35;
+}
+.is-soon .domain_mcp__left {
+  background: var(--caution);
+}
+.is-urgent .domain_mcp__left,
+.is-expired .domain_mcp__left {
+  background: var(--fault);
+}
+.domain_mcp__scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 0.875rem;
+  color: var(--s-muted);
+}
+.domain_mcp__mono {
+  font-family: var(--font-hash);
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+.domain_mcp__cert .domain_mcp__tags li {
+  font-family: var(--font-hash);
+  font-size: 0.875rem;
+}
+
+/* ---- IP ---- */
+.domain_mcp__addrs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+}
+.domain_mcp__addrs li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+.domain_mcp__addr {
+  font-family: var(--font-hash);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+}
+
+/* ---- per-vendor accents ---- */
+.svc--nova .domain_mcp__headline,
+.svc--nova .domain_mcp__tabname {
+  font-style: italic;
+  font-weight: 400;
+}
+.svc--quarry .domain_mcp__panel,
+.svc--quarry .domain_mcp__tab[aria-selected='true'] {
+  border-width: 2px;
+  border-color: var(--s-ink);
+}
+.svc--quarry .domain_mcp__tab[aria-selected='true'] {
+  border-bottom-color: var(--s-panel);
+  margin-bottom: -2px;
+  box-shadow: inset 0 6px 0 var(--s-accent);
+}
+.svc--quarry .domain_mcp__tabname,
+.svc--quarry .domain_mcp__headline {
+  font-variation-settings: 'wdth' 75;
+  font-weight: 800;
+}
+.svc--lumen .domain_mcp__headline,
+.svc--lumen .domain_mcp__tabname {
+  font-weight: 350;
+}
+
+@media (max-width: 760px) {
+  .domain_mcp__tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .domain_mcp__tab,
+  .domain_mcp__tab[aria-selected='true'] {
+    margin-bottom: 0;
+    border-radius: min(var(--s-panel-radius), 12px);
+    border-bottom-color: var(--s-rule);
+  }
+  .svc--quarry .domain_mcp__tab[aria-selected='true'] {
+    margin-bottom: 0;
+    border-bottom-color: var(--s-ink);
+  }
+  .domain_mcp__panel {
+    padding: 18px 16px 22px;
+    border-radius: var(--s-panel-radius);
+  }
+  .domain_mcp__ask .svc__pay {
+    width: 100%;
+  }
+  .domain_mcp__rtype th {
+    width: 6.5rem;
+    padding-right: 10px;
+  }
+}
