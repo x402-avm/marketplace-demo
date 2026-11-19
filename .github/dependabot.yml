@@ -4,11 +4,79 @@ updates:
     directory: "/marketplace/gateway"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # fastmcp >= 4 is incompatible with ai-economy-sdk==0.4.0 which pins fastmcp>=3.4,<4:
+      # No solution found: ai-economy-sdk>=0.4.0 depends on fastmcp>=3.4,<4
+      - dependency-name: "fastmcp"
+        update-types: ["version-update:semver-major"]
+      # fastmcp-slim >= 4 is incompatible with ai-economy-sdk==0.4.0 (requires fastmcp<4):
+      # No solution found: ai-economy-sdk>=0.4.0 depends on fastmcp-slim>=3.4.0,<=3.4.11
+      - dependency-name: "fastmcp-slim"
+        update-types: ["version-update:semver-major"]
+      # mcp >= 2 is incompatible with ai-economy-sdk==0.4.0 which pins mcp>=1.29,<2:
+      # No solution found: ai-economy-sdk>=0.4.0 depends on mcp>=1.29,<2
+      - dependency-name: "mcp"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: "pip"
+    directory: "/chain"
+    schedule:
+      interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # fastmcp / mcp majors are incompatible with ai-economy-sdk==0.4.0
+      - dependency-name: "fastmcp"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "fastmcp-slim"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "mcp"
+        update-types: ["version-update:semver-major"]
+
   - package-ecosystem: "npm"
     directory: "/marketplace/web"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # React 19 / @types/react 19 introduce breaking type changes to useRef and RefObject:
+      # error TS2322: Type 'RefObject<HTMLDivElement | null>' is not assignable to type 'RefObject<HTMLDivElement>'
+      # error TS2554: Expected 1 arguments, but got 0 for useRef
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react-dom"
+        update-types: ["version-update:semver-major"]
+
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
