@@ -71,5 +71,5 @@ uvicorn==0.52.0
 watchfiles==1.2.0
 websockets==17.0.1
 
-x402-algorand==0.2.1
-ai-economy-sdk==0.4.1
+x402-algorand==0.3.0
+ai-economy-sdk==0.5.0

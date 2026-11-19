@@ -209,6 +209,7 @@ async def probe_port(domain, port, cases, required_tools, tmp, results, paid=Fal
                 cfg["network"],
                 algod_url=cfg["algod_url"],
                 algod_token=cfg["algod_token"],
+                transport="sse",
             )
         else:
             from mcp.client.session import ClientSession

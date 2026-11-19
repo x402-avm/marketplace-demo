@@ -8,6 +8,7 @@ import { FilePreview } from '../components/FilePreview'
 import { PassOffer } from '../components/PassOffer'
 import { usePasses } from '../hooks/usePasses'
 import { resolveAssetName } from '../utils/format'
+import { SpendLimitExceededError } from 'x402-avm-js'
 import { payForRequirement, buildIdentityTxn, encodeIdentityHeader } from '../lib/payments'
 import { passFor, serviceScope, vendorScope } from '../lib/passes'
 import { domainInfo } from '../lib/domains'
@@ -105,7 +106,11 @@ export const ListingPage: React.FC = () => {
       try {
         paymentSignature = await payForRequirement(first.paymentRequired, activeAddress, algodClient, (t, i) => signTransactions(t, i))
       } catch (e: any) {
-        setError(`The payment was not signed or could not be built: ${e.message || e}`)
+        if (e instanceof SpendLimitExceededError) {
+          setError('This call costs more than the demo spend cap.')
+        } else {
+          setError(`The payment was not signed or could not be built: ${e.message || e}`)
+        }
         return
       }
       const paid = await callListing(id, { tool: name, args: callArgs, paymentSignature, identityTxn })

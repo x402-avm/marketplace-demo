@@ -152,6 +152,7 @@ async def run_demo(domains: list, payer_mode: str, start_domains: bool):
                 cfg["network"],
                 algod_url=cfg["algod_url"],
                 algod_token=cfg["algod_token"],
+                transport="sse",
             ) as session:
                 timeout_sec = case.get("timeout", 120)
                 res = await asyncio.wait_for(session.call_tool(tool_name, call_args), timeout=timeout_sec)

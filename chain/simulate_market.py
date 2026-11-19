@@ -295,6 +295,7 @@ async def run_simulation(args):
                 algod_url=common.ALGOD_URL,
                 algod_token=common.TOKEN,
                 timeout=30.0,
+                transport="sse",
             ) as session:
                 res = await session.call_tool(tool_name, tool_args)
                 is_error = getattr(res, "isError", False)

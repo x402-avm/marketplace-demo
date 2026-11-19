@@ -37,7 +37,7 @@ async def main() -> None:
     listing_id = args[1] if args[0] == "--list" else args[0]
     item = _listing(listing_id)
     url = f"http://127.0.0.1:{item['port']}/sse"
-    async with paid_mcp_session(url, key, acc["network"], acc["algod_url"], acc["algod_token"], timeout=900) as session:
+    async with paid_mcp_session(url, key, acc["network"], acc["algod_url"], acc["algod_token"], timeout=900, transport="sse") as session:
         if args[0] == "--list":
             tools = await session.list_tools()
             print(json.dumps([{"name": t.name, "description": t.description, "inputSchema": t.inputSchema} for t in tools.tools], indent=2))

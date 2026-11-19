@@ -4,9 +4,10 @@ import {
   buildIdentityTxn as realBuildIdentityTxn,
   encodeIdentityHeader as realEncodeIdentityHeader,
 } from 'x402-avm-js'
+import type { PaymentRequired } from 'x402-avm-js'
 
 export async function payForRequirement(
-  paymentRequired: any,
+  paymentRequired: PaymentRequired,
   payerAddress: string,
   algod: algosdk.Algodv2,
   signTxns: (txns: Uint8Array[], indexes: number[]) => Promise<(Uint8Array | null)[]>
@@ -29,7 +30,8 @@ export async function payForRequirement(
     }
     return mapped
   }
-  return realPayForRequirement(paymentRequired, payerAddress, algod, safeSignTxns)
+  // Demo cap: 10 ALGO / 10 mUSD per call. The wallet still asks the user to approve every payment.
+  return realPayForRequirement(paymentRequired, payerAddress, algod, safeSignTxns, { maxAmount: 10_000_000n })
 }
 
 export function buildIdentityTxn(

@@ -8,7 +8,9 @@ REPO = SERVERS.parent
 
 
 def proxy_port(domain: str, index: int) -> int:
-    """Get the port for a proxy from topology.json."""
+    """Get the port for a proxy from topology.json, or PORT env override."""
+    if "PORT" in os.environ:
+        return int(os.environ["PORT"])
     topology = json.load(open(SERVERS / "topology.json"))
     return topology[domain]["proxy_ports"][index - 1]
 
@@ -108,4 +110,4 @@ def serve(mcp, domain: str, index: int) -> None:
             bulk_discount=0.5,
             replay_db=str(SERVERS / "tests" / "run" / f"replay_{domain}.sqlite"),
         )
-    uvicorn.run(gate.wrap(mcp), host="127.0.0.1", port=port, log_level="warning")
+    uvicorn.run(gate.wrap(mcp, transport="sse"), host="127.0.0.1", port=port, log_level="warning")
