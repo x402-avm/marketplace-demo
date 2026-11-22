@@ -3,13 +3,13 @@
 [![CI](https://github.com/x402-avm/marketplace-demo/actions/workflows/ci.yml/badge.svg)](https://github.com/x402-avm/marketplace-demo/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Reference marketplace demonstration showcasing 64 paid AI tools across 4 independent vendors on Algorand LocalNet.
+**A working marketplace where people and programs buy AI tools per call, on Algorand LocalNet.**
 
-`marketplace-demo` is a reference integration demonstrating how autonomous AI agents and users discover, purchase, and consume payment-gated Model Context Protocol (MCP) services on Algorand. It integrates `ai-economy-sdk` (Python MCP servers), `x402-algorand` (AVM payment schemes), and `x402-avm-js` (React / TypeScript web frontend) into a cohesive local ecosystem.
+Four independent vendors sell 64 tools, from PDF reading and OCR to code sandboxes and image generation, each priced per call. Shoppers pay from a wallet in the browser, or buy a pass and call for free for 30 days. A scripted agent (`servers/tools/agent_demo.py`) calls tools across every vendor and pays for each call itself. Every payment is a real Algorand transaction on your machine, and nothing is charged when a tool fails.
 
-> **Note**: This repository is a demo of the x402-avm SDKs. It runs on AlgoKit LocalNet only. The SDKs are the product: [ai-economy-sdk](https://github.com/x402-avm/ai-economy-sdk), [x402-algorand](https://github.com/x402-avm/x402-algorand), [x402-avm-js](https://github.com/x402-avm/x402-avm-js).
->
-> This demonstration and reference integration is designed for local development and architecture evaluation. It runs against Algorand LocalNet with simulated funding dispensers. Do not deploy these demo configurations directly to production networks without security review.
+It shows all three [x402-avm](https://github.com/x402-avm/x402-avm) packages working together: the vendors use [`ai-economy-sdk`](https://github.com/x402-avm/ai-economy-sdk) (which builds on [`x402-algorand`](https://github.com/x402-avm/x402-algorand)), and the web app pays with [`x402-avm-js`](https://github.com/x402-avm/x402-avm-js).
+
+> **This is a demo, not a product.** It runs on LocalNet only, with test money and dispenser-funded accounts. Use it to see the pieces working together, then build on the packages. Don't deploy it as it is.
 
 ## Architecture
 
